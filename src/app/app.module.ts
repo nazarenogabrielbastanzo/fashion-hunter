@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { CookieService } from 'ngx-cookie-service';
 import { SharedModule } from './modules/shared/shared.module';
+import { AngularFireModule} from '@angular/fire/compat';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -33,6 +34,7 @@ const analytics = getAnalytics(app);
     AppRoutingModule,
     MaterialModule,
     SharedModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [Title, CookieService],
   bootstrap: [AppComponent],
