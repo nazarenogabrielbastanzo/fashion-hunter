@@ -1,4 +1,7 @@
 {
+  "projects": {
+    "default": "fashion-hunter-27637"
+  },
   "targets": {
     "fashion-hunter-27637": {
       "hosting": {
@@ -7,8 +10,5 @@
         ]
       }
     }
-  },
-  "projects": {
-    "default": "fashion-hunter-27637"
   }
 }
