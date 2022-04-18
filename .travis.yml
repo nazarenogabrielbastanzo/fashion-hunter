@@ -1,9 +1,10 @@
 language: node_js
 node_js:
   - "16.14.2"
-script:
-  - echo "Deploy!!"
 install:
-  - npm install -g firebase-tools
+  - npm install
+script:
+  - npm run build
 after_success:
+  - npm install -g firebase-tools
   - firebase deploy --project fashion-hunter-27637 --token "$FIREBASE_TOKEN"
