@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fashion-hunter-27637": {
+      "hosting": {
+        "c4-05-m": [
+          "fashion-hunter-27637"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fashion-hunter-27637"
+  }
+}

@@ -125,6 +125,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "c4-05-m:build:production",
+            "firebaseProject": "fashion-hunter-27637",
+            "firebaseHostingSite": "fashion-hunter-27637"
+          }
         }
       }
     }
