@@ -47,3 +47,18 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
     ```sh
     http://localhost:4200/
     ```
+## Deploy
+
+1. ```sh
+    npm run build
+    ```
+2. ```sh
+    git add .
+    ```
+3. ```sh
+    git commit -m "My feature"
+    ```
+4. ```sh
+    git push
+    ```
+5. Esperar unos minutos, e ingresar a https://fashion-hunter-27637.web.app/ 
