@@ -1,0 +1,106 @@
+.back img {
+  cursor: pointer;
+}
+
+.cabecero{
+  display: flex;
+  position: relative;
+  top: 8rem;
+  left: 7rem;
+}
+
+.cabecero .foto-usuario{
+  width: 225px;
+  height: 225px;
+  border: solid 2px #5b074f;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.info-user{
+  position: relative;
+  margin-left: 3em;
+  width: 40%;
+}
+
+h4{
+  display: inline-block;
+  font-size: 30px;
+}
+
+p{
+  font-size: 18px;
+}
+
+hr{
+  border: 1px solid #5b074f
+}
+.options{
+  margin-left: 5em;
+}
+
+.btn{
+  display: block;
+  color: #ffff;
+  width: 100%;
+  background-color: rgb(217, 121, 104);
+  text-align: center;
+  margin: 30px;
+  margin-left: 0;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover{
+  background-color: rgb(218, 80, 56);
+}
+
+strong{
+  margin-right: 5em;
+}
+.fas{
+  color: #ffff;
+  margin-right: 7px;
+}
+
+.publicaciones{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10em;
+}
+
+.grid-container{
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.grid-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3em;
+  transition: transform 0.3s ease-in-out;
+}
+
+.grid-item p{
+  margin-top: 5px;
+  display: inline;
+}
+
+.grid-item img{
+  width: 16em;
+  height: 18em;
+  border-radius: 15px;
+}
+
+
+.grid-item:hover{
+  filter: opacity(0.9);
+  transform: scale(1.04);
+}
