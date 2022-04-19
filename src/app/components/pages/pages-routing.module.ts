@@ -6,6 +6,7 @@ import { GuardadasComponent } from './guardadas/guardadas.component';
 import { MensajesComponent } from './mensajes/mensajes.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
+import { CambioContraComponent } from './cambio-contra/cambio-contra.component';
 
 const routes: Routes = [
   { path: '', component: PagesComponent },
@@ -29,6 +30,11 @@ const routes: Routes = [
     path: 'editar-perfil',
     component: EditarPerfilComponent,
     data: { animation: 'EditarPerfilPage' },
+  },
+  {
+    path: 'cambiar-contra',
+    component: CambioContraComponent,
+    data: { animation: 'CambiarContraPage' },
   },
 ];
 

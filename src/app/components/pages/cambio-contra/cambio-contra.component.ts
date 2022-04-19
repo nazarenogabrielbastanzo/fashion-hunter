@@ -12,4 +12,8 @@ export class CambioContraComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  cambiar(){
+
+  }
+
 }
