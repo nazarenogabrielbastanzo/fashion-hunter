@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { GuardadasComponent } from './guardadas/guardadas.component';
 import { MensajesComponent } from './mensajes/mensajes.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 const routes: Routes = [
   { path: '', component: PagesComponent },
@@ -23,6 +24,11 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     data: { animation: 'ProfilePage' },
+  },
+  {
+    path: 'editar-perfil',
+    component: EditarPerfilComponent,
+    data: { animation: 'EditarPerfilPage' },
   },
 ];
 

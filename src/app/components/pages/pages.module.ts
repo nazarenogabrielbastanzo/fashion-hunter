@@ -16,6 +16,7 @@ import { DescartarPublicacionComponent } from './components/descartar-publicacio
 import { CreandoPublicacionComponent } from './components/creando-publicacion/creando-publicacion.component';
 import { MaterialModule } from '../../modules/material/material.module';
 import { ProfileComponent } from './profile/profile.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProfileComponent } from './profile/profile.component';
     CrearPublicacion1Component,
     DescartarPublicacionComponent,
     CreandoPublicacionComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditarPerfilComponent
   ],
   imports: [
     CommonModule,
