@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
     this.httpService.get<any>(`${environment.apiUrl}/user/${userId}`, true)
     .subscribe({
       next: (resp: any) => {
-        this.user = resp.data.user;
+        this.user = resp.data.user[0];
       },
       error: error => { },
       complete: () => { }
