@@ -18,6 +18,7 @@ import { MaterialModule } from '../../modules/material/material.module';
 import { ProfileComponent } from './profile/profile.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { CambioContraComponent } from './cambio-contra/cambio-contra.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CambioContraComponent } from './cambio-contra/cambio-contra.component';
     CreandoPublicacionComponent,
     ProfileComponent,
     EditarPerfilComponent,
-    CambioContraComponent
+    CambioContraComponent,
+    NotificacionesComponent
   ],
   imports: [
     CommonModule,
