@@ -12,4 +12,8 @@ export class NotificacionesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  guardar(){
+
+  }
+
 }

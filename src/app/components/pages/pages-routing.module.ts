@@ -7,6 +7,7 @@ import { MensajesComponent } from './mensajes/mensajes.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { CambioContraComponent } from './cambio-contra/cambio-contra.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 const routes: Routes = [
   { path: '', component: PagesComponent },
@@ -35,6 +36,11 @@ const routes: Routes = [
     path: 'cambiar-contra',
     component: CambioContraComponent,
     data: { animation: 'CambiarContraPage' },
+  },
+  {
+    path: 'notificaciones',
+    component: NotificacionesComponent,
+    data: { animation: 'NotificacionesPage' },
   },
 ];
 
