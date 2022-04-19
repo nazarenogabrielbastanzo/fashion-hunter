@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { CambioContraComponent } from './cambio-contra/cambio-contra.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
+import { PrivacidadComponent } from './privacidad/privacidad.component';
 
 const routes: Routes = [
   { path: '', component: PagesComponent },
@@ -41,6 +42,11 @@ const routes: Routes = [
     path: 'notificaciones',
     component: NotificacionesComponent,
     data: { animation: 'NotificacionesPage' },
+  },
+  {
+    path: 'privacidad',
+    component: PrivacidadComponent,
+    data: { animation: 'PrivacidadPage' },
   },
 ];
 
