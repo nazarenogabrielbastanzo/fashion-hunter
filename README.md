@@ -26,7 +26,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
     ```sh
     export const environment = {
     production: true,
-    apiUrl: "http://localhost:3000/api/v1",
+    apiUrl: "https://fhunter-api.herokuapp.com",
     mapBoxToken: "pk.eyJ1IjoibmF6YXJlbm9iYXN0YW56byIsImEiOiJjbDE5eTBxcjgwMWtlM2Zwamh3cWZ6Nmd0In0.QoZkJmffJebZGfpVaNDTBA",
     firebaseConfig: {
         apiKey: "AIzaSyCyI8o4CjBi9Jr6FBwQWJKP9qLmzedriVY",
