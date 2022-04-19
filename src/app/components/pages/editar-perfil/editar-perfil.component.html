@@ -13,7 +13,7 @@
   <form class="container" (ngSubmit)="guardar()" #newUserForm="ngForm">
     <div class="cambiar-datos">
       <div class="input-info">
-        <img [src]="user.img" />
+        <img [src]="user?.img" />
         <label id="cambiar-foto">Cambiar foto de perfil</label>
       </div>
 
@@ -21,7 +21,7 @@
         <label class="label-name">Nombre</label>
         <input
           class="name"
-          placeholder="{{ user.firstName }} {{ user.lastName }}"
+          placeholder="{{ user?.firstName }} {{ user?.lastName }}"
         />
         <p>
           El nombre con el que te conoce la mayor cantidad de personas, asi
@@ -30,7 +30,7 @@
       </div>
       <div class="input-info">
         <label>Usuario</label>
-        <input placeholder="@{{ user.username }}" />
+        <input placeholder="@{{ user?.username }}" />
       </div>
       <div class="input-info">
         <label class="otro-margin">Ocupación</label>
@@ -38,7 +38,7 @@
       </div>
       <div class="input-info">
         <label class="otro-margin">Correo <br />electrónico</label>
-        <input placeholder="{{ user.email }}" />
+        <input placeholder="{{ user?.email }}" />
       </div>
       <div class="input-info">
         <label class="biografia">Biografía</label>
