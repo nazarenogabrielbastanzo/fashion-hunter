@@ -22,6 +22,7 @@
         <input
           class="name"
           placeholder="{{ user?.firstName }} {{ user?.lastName }}"
+          autocomplete="off"
         />
         <p>
           El nombre con el que te conoce la mayor cantidad de personas, asi
@@ -30,19 +31,23 @@
       </div>
       <div class="input-info">
         <label>Usuario</label>
-        <input placeholder="@{{ user?.username }}" />
+        <input
+          class="username"
+          placeholder="@{{ user?.username }}"
+          autocomplete="off"
+        />
       </div>
       <div class="input-info">
         <label class="otro-margin">Ocupación</label>
-        <input />
+        <input autocomplete="off" />
       </div>
       <div class="input-info">
         <label class="otro-margin">Correo <br />electrónico</label>
-        <input placeholder="{{ user?.email }}" />
+        <input placeholder="{{ user?.email }}" autocomplete="off" />
       </div>
       <div class="input-info">
         <label class="biografia">Biografía</label>
-        <input id="biografia" />
+        <input id="biografia" autocomplete="off" />
       </div>
       <div class="opciones">
         <a id="eliminar-cuenta">Eliminar cuenta</a>
@@ -50,7 +55,7 @@
           <div class="modal">
             <p>¿Estás segur@ que quieres eliminar tu cuenta?</p>
             <label>Colocar contraseña para confirmar</label>
-            <input />
+            <input autocomplete="off" />
             <button id="eliminar">Eliminar</button>
           </div>
         </div>
