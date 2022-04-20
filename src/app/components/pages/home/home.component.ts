@@ -6,6 +6,7 @@ import { delay, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearPublicacionComponent } from '../components/crear-publicacion/crear-publicacion.component';
 import { LoginService } from '../../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
     private _title: Title,
     private httpService: HttpConfigService,
     private loginService: LoginService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {
     this._title.setTitle('Fashion Hunter - Home');
 
@@ -83,5 +85,9 @@ export class HomeComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
     });
+  }
+
+  editarPerfil() {
+    this.router.navigate(['/editar-perfil']);
   }
 }
