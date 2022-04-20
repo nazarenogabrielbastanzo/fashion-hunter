@@ -1,4 +1,12 @@
 /* POSTS */
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-start;
+}
 .posts-container {
   position: relative;
   top: 5rem;

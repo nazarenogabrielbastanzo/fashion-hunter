@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   suggestions = [];
   currentUser!: any;
   oculto = true;
+  posts: any;
 
   constructor(
     private _title: Title,
@@ -43,14 +44,27 @@ export class HomeComponent implements OnInit {
     });
 
     const userId = this.loginService.getUserId();
-    this.httpService.get<any>(`${environment.apiUrl}/user/${userId}`, true)
+    this.httpService
+      .get<any>(`${environment.apiUrl}/user/${userId}`, true)
       .subscribe({
         next: (resp: any) => {
           this.currentUser = resp.data.user;
         },
-        error: error => { },
-        complete: () => { }
+        error: (error) => {},
+        complete: () => {},
       });
+
+    this.listarPosts().subscribe({
+      next: (posts: any) => {
+        console.log(posts);
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log('Complete');
+      },
+    });
   }
 
   ngOnInit(): void {}
@@ -65,7 +79,9 @@ export class HomeComponent implements OnInit {
             return user.username !== this.currentUser.username;
           });
           if (resultSuggestion.length > 5) {
-            this.suggestions = resultSuggestion.slice(resultSuggestion.length -5);
+            this.suggestions = resultSuggestion.slice(
+              resultSuggestion.length - 5
+            );
           } else {
             this.suggestions = resultSuggestion;
           }
@@ -78,14 +94,17 @@ export class HomeComponent implements OnInit {
   crearPublicacion() {
     const dialogRef = this.dialog.open(CrearPublicacionComponent, {
       disableClose: false,
-      data: {user: this.currentUser[0]}
+      data: { user: this.currentUser[0] },
     });
 
     dialogRef.afterClosed().subscribe((result) => {});
-
   }
 
   editarPerfil() {
     this.router.navigate(['/editar-perfil']);
+  }
+
+  listarPosts() {
+    return this.httpService.get(`${environment.apiUrl}/posts`, true);
   }
 }
