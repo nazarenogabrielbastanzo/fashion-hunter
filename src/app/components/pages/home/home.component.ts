@@ -78,13 +78,11 @@ export class HomeComponent implements OnInit {
   crearPublicacion() {
     const dialogRef = this.dialog.open(CrearPublicacionComponent, {
       disableClose: false,
-      data: {user: this.currentUser}
+      data: {user: this.currentUser[0]}
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
+
   }
 
   editarPerfil() {
