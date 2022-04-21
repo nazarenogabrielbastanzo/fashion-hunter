@@ -2,7 +2,7 @@ import { environment } from './../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { HttpConfigService } from '../../../services/http-config.service';
-import { delay, of, tap } from 'rxjs';
+import { delay, Observable, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearPublicacionComponent } from '../components/crear-publicacion/crear-publicacion.component';
 import { LoginService } from '../../../services/login.service';
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   suggestions = [];
   currentUser!: any;
   oculto = true;
-  posts: any;
+  posts!: Observable<Array<any>>;
 
   constructor(
     private _title: Title,
@@ -56,14 +56,10 @@ export class HomeComponent implements OnInit {
 
     this.listarPosts().subscribe({
       next: (posts: any) => {
-        console.log(posts);
+        this.posts = of(posts.data.resolvedPost);
       },
-      error: (error: any) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('Complete');
-      },
+      error: (error: any) => {},
+      complete: () => {},
     });
   }
 

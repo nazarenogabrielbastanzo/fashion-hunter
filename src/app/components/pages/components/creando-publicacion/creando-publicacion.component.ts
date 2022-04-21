@@ -42,7 +42,8 @@ export class CreandoPublicacionComponent implements OnInit {
   }
 
   goHome() {
-    this.dialog.closeAll();
+    // this.dialog.closeAll();
+    window.location.reload();
   }
 
 }

@@ -3,101 +3,28 @@
 
 <div class="container">
   <!-- Post n -->
-  <div class="posts-container" *ngFor="let post of posts">
-    <div class="posts">
-      <div class="post">
-        <img src="assets/images/avatar/lina.png" class="img-rounded" alt="" />
-        <p class="user">
-          <span class="name">Lina Grante</span> -
-          <small><span class="username">lina.gran</span></small
-          ><br />
-          <small>Dónde puedo encontrar este modelo de pulsera?</small>
-        </p>
-        <div class="elapsed">
-          <p><small>Hace 2h</small></p>
-        </div>
-      </div>
-      <img
-        src="assets/images/feed-inicio/nati-melnychuk-oO0JAOJhquk-unsplash.jpg"
-        class="post-image"
-        alt=""
-      />
-      <div class="actions">
-        <img src="assets/images/icons/up_arrow.png" alt="" class="arrow-up" />
-        <img
-          src="assets/images/icons/down_arrow.png"
-          alt=""
-          class="arrow-down"
-        />
-        <img src="assets/images/icons/chat1.png" alt="" class="chat-icon" />
-        <div class="favorites">
-          <span class="favorite-counter">15</span>
-          <img src="assets/images/icons/Favorite.png" alt="" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Post 1 -->
-  <div class="posts-container">
-    <div class="posts">
-      <div class="post">
-        <img src="assets/images/avatar/lina.png" class="img-rounded" alt="" />
-        <p class="user">
-          <span class="name">Lina Grante</span> -
-          <small><span class="username">lina.gran</span></small
-          ><br />
-          <small>Dónde puedo encontrar este modelo de pulsera?</small>
-        </p>
-        <div class="elapsed">
-          <p><small>Hace 6h</small></p>
-        </div>
-      </div>
-      <img
-        src="assets/images/feed-inicio/nati-melnychuk-oO0JAOJhquk-unsplash.jpg"
-        class="post-image"
-        alt=""
-      />
-      <div class="actions">
-        <img src="assets/images/icons/up_arrow.png" alt="" class="arrow-up" />
-        <img
-          src="assets/images/icons/down_arrow.png"
-          alt=""
-          class="arrow-down"
-        />
-        <img src="assets/images/icons/chat1.png" alt="" class="chat-icon" />
-        <div class="favorites">
-          <span class="favorite-counter">15</span>
-          <img src="assets/images/icons/Favorite.png" alt="" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Post 2 -->
-  <div class="posts-container">
+  <div class="posts-container" *ngFor="let post of posts | async">
     <div class="posts">
       <div class="post">
         <img
-          src="assets/images/avatar/joaquin.png"
+          [src]="post?.postedBy[0].profilePicDownloadUrl"
           class="img-rounded"
           alt=""
         />
         <p class="user">
-          <span class="name">Joaquín Lewis</span> -
-          <small><span class="username">joa.lw</span></small
-          ><br />
-          <small>Fotografía de producto</small>
+          <span class="name">{{ post?.postedBy[0].fullName }}</span>
+          <!-- -
+          <small><span class="username">lina.gran</span></small
+          > --><br />
+          <small>{{ post?.description }}</small>
         </p>
         <div class="elapsed">
-          <p><small>Hace 2h</small></p>
+          <p>
+            <small>{{ post?.created | date }}</small>
+          </p>
         </div>
       </div>
-      <img
-        src="assets/images/feed-inicio/danilo-capece-NoVnXXmDNi0-unsplash.jpg"
-        class="post-image"
-        alt=""
-      />
+      <img [src]="post?.image" class="post-image" alt="" />
       <div class="actions">
         <img src="assets/images/icons/up_arrow.png" alt="" class="arrow-up" />
         <img
@@ -107,7 +34,7 @@
         />
         <img src="assets/images/icons/chat1.png" alt="" class="chat-icon" />
         <div class="favorites">
-          <span class="favorite-counter">10</span>
+          <span class="favorite-counter">15</span>
           <img src="assets/images/icons/Favorite.png" alt="" />
         </div>
       </div>
