@@ -4,6 +4,7 @@ import { HttpConfigService } from '../../../services/http-config.service';
 import { environment } from '../../../../environments/environment';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogComponent } from '../../../modules/shared/dialog/dialog.component';
+import { Router } from '@angular/router';
 
 const userData = new FormData();
 
@@ -27,7 +28,8 @@ export class CrearCuentaComponent implements OnInit {
     private _title: Title,
     private httpService: HttpConfigService,
     private sanitizer: DomSanitizer,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {
     this.previsualizacion = "assets/images/avatar/guest-user.png";
   }
@@ -35,6 +37,10 @@ export class CrearCuentaComponent implements OnInit {
   ngOnInit(): void {
     // Cambia el title del sitio:
     this._title.setTitle('Fashion Hunter - Crear Cuenta');
+  }
+
+  goLogin() {
+    this.router.navigate(['/login']);
   }
 
   // Carga el archivo a subir
