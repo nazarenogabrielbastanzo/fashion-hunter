@@ -26,15 +26,16 @@
       </div>
       <img [src]="post?.image" class="post-image" alt="" />
       <div class="actions">
-        <img src="assets/images/icons/up_arrow.png" alt="" class="arrow-up" />
+        <img src="assets/images/icons/up_arrow.png" alt="" class="arrow-up" (click)="like(post?._id)" />
         <img
           src="assets/images/icons/down_arrow.png"
           alt=""
           class="arrow-down"
+          (click)="disLike(post?._id)"
         />
         <img src="assets/images/icons/chat1.png" alt="" class="chat-icon" />
         <div class="favorites">
-          <span class="favorite-counter">15</span>
+          <span class="favorite-counter">{{ post?.numLikes || numLikes || 0 }}</span>
           <img src="assets/images/icons/Favorite.png" alt="" />
         </div>
       </div>

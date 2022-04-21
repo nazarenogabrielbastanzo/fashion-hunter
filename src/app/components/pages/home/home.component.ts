@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   oculto = true;
   posts!: Array<any>;
   moment: any = moment;
+  numLikes!: number;
 
   constructor(
     private _title: Title,
@@ -59,6 +60,8 @@ export class HomeComponent implements OnInit {
 
     this.listarPosts().subscribe({
       next: (posts: any) => {
+        console.log(posts);
+
         this.posts = posts.data.resolvedPost;
       },
       error: (error: any) => {},
@@ -105,5 +108,41 @@ export class HomeComponent implements OnInit {
 
   listarPosts() {
     return this.httpService.get(`${environment.apiUrl}/posts`, true);
+  }
+
+  like(postId: string) {
+    this.httpService.patch(`${environment.apiUrl}/posts/like/${postId}`, {}, true)
+      .subscribe({
+        next: (resp: any) => {
+          console.log(resp);
+          this.numLikes = resp.data.post.numLikes;
+        },
+        error: (error: any) => {
+          console.log(error);
+
+        },
+        complete: () => {
+          console.log('Like Complete');
+
+        }
+      });
+  }
+
+  disLike(postId: string) {
+    this.httpService.delete(`${environment.apiUrl}/posts/like/${postId}`, true)
+      .subscribe({
+        next: (resp: any) => {
+          console.log(resp);
+          this.numLikes = resp.data.post.numlikes;
+        },
+        error: (error: any) => {
+          console.log(error);
+
+        },
+        complete: () => {
+          console.log('disLike Complete');
+
+        }
+      });
   }
 }

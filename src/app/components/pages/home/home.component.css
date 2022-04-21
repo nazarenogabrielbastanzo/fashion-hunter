@@ -57,6 +57,7 @@
   width: 100%;
   height: 30rem;
   border-radius: 20px;
+  object-fit: cover;
 }
 .actions {
   display: flex;
@@ -64,19 +65,23 @@
 }
 .arrow-up {
   margin-left: 2.5px;
+  cursor: pointer;
 }
 .arrow-down,
 .chat-icon {
   margin-left: 50px;
+  cursor: pointer;
 }
 .favorites {
   margin-left: 185px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .favorite-counter {
   font-size: 25px;
   margin-right: 5px;
+  cursor: default;
 }
 
 /* Shortcuts */

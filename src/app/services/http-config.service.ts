@@ -19,8 +19,7 @@ export class HttpConfigService {
     this._headers = new HttpHeaders({
       /* 'Content-Type': 'application/json', */
       /* 'Access-Control-Allow-Origin': '*', */
-      'Authorization':
-        'Bearer ' + theToken,
+      'Authorization': 'Bearer ' + theToken,
     });
   }
 
@@ -37,9 +36,30 @@ export class HttpConfigService {
     );
   }
 
+  // Función genérica para realizar cualquier petición PATCH
+  public patch<T>(
+    url: string,
+    body: any,
+    activateHeader: boolean = false
+  ): Observable<T> {
+    return this.http.patch<T>(
+      url,
+      body,
+      activateHeader ? { headers: this._headers } : {}
+    );
+  }
+
   // Función genérica para realizar cualquier petición GET
   public get<T>(url: string, activateHeader: boolean = false): Observable<T> {
     return this.http.get<T>(
+      url,
+      activateHeader ? { headers: this._headers } : {}
+    );
+  }
+
+  // Función genérica para realizar cualquier petición DELETE
+  public delete<T>(url: string, activateHeader: boolean = false): Observable<T> {
+    return this.http.delete<T>(
       url,
       activateHeader ? { headers: this._headers } : {}
     );
