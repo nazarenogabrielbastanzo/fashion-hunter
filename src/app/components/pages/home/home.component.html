@@ -20,7 +20,7 @@
         </p>
         <div class="elapsed">
           <p>
-            <small>{{ post?.created | date }}</small>
+            <small>{{ moment(post?.created).fromNow() }}</small>
           </p>
         </div>
       </div>
