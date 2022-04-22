@@ -60,8 +60,6 @@ export class HomeComponent implements OnInit {
 
     this.listarPosts().subscribe({
       next: (posts: any) => {
-        console.log(posts);
-
         this.posts = posts.data.resolvedPost;
       },
       error: (error: any) => {},
@@ -114,15 +112,12 @@ export class HomeComponent implements OnInit {
     this.httpService.patch(`${environment.apiUrl}/posts/like/${postId}`, {}, true)
       .subscribe({
         next: (resp: any) => {
-          console.log(resp);
           this.numLikes = resp.data.post.numLikes;
         },
         error: (error: any) => {
-          console.log(error);
 
         },
         complete: () => {
-          console.log('Like Complete');
 
         }
       });
@@ -132,15 +127,12 @@ export class HomeComponent implements OnInit {
     this.httpService.delete(`${environment.apiUrl}/posts/like/${postId}`, true)
       .subscribe({
         next: (resp: any) => {
-          console.log(resp);
           this.numLikes = resp.data.post.numlikes;
         },
         error: (error: any) => {
-          console.log(error);
 
         },
         complete: () => {
-          console.log('disLike Complete');
 
         }
       });
