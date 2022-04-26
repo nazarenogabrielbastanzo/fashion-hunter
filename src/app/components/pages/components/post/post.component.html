@@ -33,15 +33,19 @@
       (click)="disLike(post?._id, post?.numLikes)"
     />
     <img src="assets/images/icons/chat1.png" alt="" class="chat-icon" />
-    <div class="favorites" *ngIf="{
-      numLikes: likesAction$ | async
-    } as likes">
+    <div
+      class="favorites"
+      *ngIf="{
+        numLikes: likesAction$ | async
+      } as likes"
+    >
+      <span class="favorite-counter" *ngIf="likes.numLikes">{{
+        likes.numLikes
+      }}</span>
       <span
         class="favorite-counter"
-        *ngIf="likes.numLikes"
-        >{{ likes.numLikes }}</span
+        *ngIf="!post?.numLikes && likes.numLikes == 0"
       >
-      <span class="favorite-counter" *ngIf="!post?.numLikes && likes.numLikes == 0">
         {{ 0 }}
       </span>
       <span
