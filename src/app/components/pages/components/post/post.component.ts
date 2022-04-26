@@ -33,7 +33,8 @@ export class PostComponent implements OnInit {
       .pipe(
         tap((resp: any) => {
           console.log(resp);
-          this.likesSubject.next(likes + 1);
+          const newLike = resp.data.post.numLikes > likes ? resp.data.post.numLikes : likes;
+          this.likesSubject.next(newLike);
         })
       )
       .subscribe();
@@ -49,7 +50,8 @@ export class PostComponent implements OnInit {
       .pipe(
         tap((resp: any) => {
           console.log(resp);
-          this.likesSubject.next(likes - 1);
+          const newLike = resp.data.post.numLikes < likes ? resp.data.post.numLikes : likes;
+          this.likesSubject.next(newLike);
         })
       )
       .subscribe();
