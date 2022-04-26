@@ -20,6 +20,7 @@ import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { CambioContraComponent } from './cambio-contra/cambio-contra.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 import { PrivacidadComponent } from './privacidad/privacidad.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PrivacidadComponent } from './privacidad/privacidad.component';
     EditarPerfilComponent,
     CambioContraComponent,
     NotificacionesComponent,
-    PrivacidadComponent
+    PrivacidadComponent,
+    PostComponent
   ],
   imports: [
     CommonModule,

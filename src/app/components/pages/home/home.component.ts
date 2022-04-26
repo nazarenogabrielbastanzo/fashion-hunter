@@ -7,7 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { CrearPublicacionComponent } from '../components/crear-publicacion/crear-publicacion.component';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +18,6 @@ export class HomeComponent implements OnInit {
   currentUser!: any;
   oculto = true;
   posts!: Array<any>;
-  moment: any = moment;
   numLikes!: number;
 
   constructor(
@@ -29,7 +27,6 @@ export class HomeComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router
   ) {
-    moment.locale('es');
     this._title.setTitle('Fashion Hunter - Home');
 
     const observablePattern = of(true).pipe(
@@ -106,35 +103,5 @@ export class HomeComponent implements OnInit {
 
   listarPosts() {
     return this.httpService.get(`${environment.apiUrl}/posts`, true);
-  }
-
-  like(postId: string) {
-    this.httpService.patch(`${environment.apiUrl}/posts/like/${postId}`, {}, true)
-      .subscribe({
-        next: (resp: any) => {
-          this.numLikes = resp.data.post.numLikes;
-        },
-        error: (error: any) => {
-
-        },
-        complete: () => {
-
-        }
-      });
-  }
-
-  disLike(postId: string) {
-    this.httpService.delete(`${environment.apiUrl}/posts/like/${postId}`, true)
-      .subscribe({
-        next: (resp: any) => {
-          this.numLikes = resp.data.post.numlikes;
-        },
-        error: (error: any) => {
-
-        },
-        complete: () => {
-
-        }
-      });
   }
 }
