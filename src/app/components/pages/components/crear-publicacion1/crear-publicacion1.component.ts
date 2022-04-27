@@ -10,13 +10,14 @@ import { environment } from '../../../../../environments/environment';
 import { HttpConfigService } from '../../../../services/http-config.service';
 import { DescartarPublicacionComponent } from '../descartar-publicacion/descartar-publicacion.component';
 import { CreandoPublicacionComponent } from '../creando-publicacion/creando-publicacion.component';
+import { User } from '../../../../interfaces/user.interface';
 @Component({
   selector: 'app-crear-publicacion1',
   templateUrl: './crear-publicacion1.component.html',
   styleUrls: ['./crear-publicacion1.component.css'],
 })
 export class CrearPublicacion1Component implements OnInit {
-  currentUser!: any;
+  currentUser!: User;
   previsualizacion!: string;
   location!: string;
   description!: string;
@@ -29,7 +30,6 @@ export class CrearPublicacion1Component implements OnInit {
     private httpService: HttpConfigService
   ) {
     this.extraerBase64(data.foto).then((imagen: any) => {
-
       this.previsualizacion = imagen.base;
     });
 
@@ -104,7 +104,6 @@ export class CrearPublicacion1Component implements OnInit {
   }
 
   publicar() {
-
     const dialogRef = this.dialog.open(CreandoPublicacionComponent, {
       disableClose: false,
       data: {
@@ -115,7 +114,5 @@ export class CrearPublicacion1Component implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {});
-
-
   }
 }

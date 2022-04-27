@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpConfigService } from './http-config.service';
+import { UserLogin } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class LoginService {
   ) { }
 
   // Login
-  login(user: any): Observable<any> {
-    return this.httpService.post(environment.apiUrl + '/user/login', user);
+  login(user: UserLogin): Observable<UserLogin> {
+    return this.httpService.post<UserLogin>(environment.apiUrl + '/user/login', user);
   }
 
   logOut() {

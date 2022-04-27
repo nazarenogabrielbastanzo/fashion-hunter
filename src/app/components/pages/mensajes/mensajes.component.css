@@ -170,6 +170,7 @@
 .outcoming-messages img {
   width: 48px;
   height: 48px;
+  object-fit: cover;
 }
 .incoming-messages .message {
   display: inline-block;

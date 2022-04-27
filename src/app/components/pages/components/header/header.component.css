@@ -42,6 +42,7 @@
   position: absolute;
   right: 0px;
   top: 0px;
+  object-fit: cover;
 }
 .img-rounded {
   width: 55px;

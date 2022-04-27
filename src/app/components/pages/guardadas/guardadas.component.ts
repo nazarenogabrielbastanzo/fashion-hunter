@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { LoginService } from '../../../services/login.service';
 import { HttpConfigService } from '../../../services/http-config.service';
 import { environment } from 'src/environments/environment';
+import { User } from '../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-guardadas',
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./guardadas.component.css']
 })
 export class GuardadasComponent implements OnInit {
-  currentUser: any;
+  currentUser!: User;
 
   constructor(
     private router: Router,
@@ -20,7 +21,7 @@ export class GuardadasComponent implements OnInit {
     private httpService: HttpConfigService
   ) {
     const userId = this.loginService.getUserId();
-    this.httpService.get<any>(`${environment.apiUrl}/user/${userId}`, true)
+    this.httpService.get<User>(`${environment.apiUrl}/user/${userId}`, true)
       .subscribe({
         next: (resp: any) => {
           this.currentUser = resp.data.user;

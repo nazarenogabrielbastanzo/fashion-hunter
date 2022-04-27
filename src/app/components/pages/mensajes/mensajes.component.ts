@@ -4,6 +4,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
+import { User } from '../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-mensajes',
@@ -17,7 +18,7 @@ export class MensajesComponent implements OnInit {
 
   viewEmojis: boolean;
   message: string;
-  user: any;
+  user!: User;
   outcomingMessages: any[] = [];
   userImg!: string;
 
@@ -38,7 +39,7 @@ export class MensajesComponent implements OnInit {
     const userId = this.loginService.getUserId();
 
     this.httpService
-      .get<any>(`${environment.apiUrl}/user/${userId}`, true)
+      .get<User>(`${environment.apiUrl}/user/${userId}`, true)
       .subscribe({
         next: (resp: any) => {
           this.user = resp.data.user[0];
@@ -74,7 +75,7 @@ export class MensajesComponent implements OnInit {
     const userId = this.loginService.getUserId();
 
     this.httpService
-      .get<any>(`${environment.apiUrl}/user/${userId}`, true)
+      .get<User>(`${environment.apiUrl}/user/${userId}`, true)
       .subscribe({
         next: (resp: any) => {
 

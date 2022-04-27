@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpConfigService } from 'src/app/services/http-config.service';
 import { LoginService } from 'src/app/services/login.service';
 import { environment } from 'src/environments/environment';
+import { User } from '../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -14,7 +15,7 @@ export class EditarPerfilComponent implements OnInit {
   nombreComnpleto: any;
   lastName: any;
   email: any;
-  user: any;
+  user!: User;
 
   constructor(
     private httpService: HttpConfigService,
@@ -22,7 +23,7 @@ export class EditarPerfilComponent implements OnInit {
   ) {
     const userId = this.loginService.getUserId();
 
-    this.httpService.get<any>(`${environment.apiUrl}/user/${userId}`, true)
+    this.httpService.get<User>(`${environment.apiUrl}/user/${userId}`, true)
       .subscribe({
         next: (resp: any) => {
           this.user = resp.data.user[0];

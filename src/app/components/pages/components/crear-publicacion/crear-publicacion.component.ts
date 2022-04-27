@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CrearPublicacion1Component } from '../crear-publicacion1/crear-publicacion1.component';
+import { User } from '../../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-crear-publicacion',
@@ -13,7 +14,7 @@ export class CrearPublicacionComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<CrearPublicacionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: User,
   ) {}
 
   ngOnInit(): void {}

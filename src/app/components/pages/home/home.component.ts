@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CrearPublicacionComponent } from '../components/crear-publicacion/crear-publicacion.component';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
+import { User } from '../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   suggestions = [];
-  currentUser!: any;
+  currentUser!: User;
   oculto = true;
   posts!: Array<any>;
   numLikes!: number;
@@ -46,10 +47,11 @@ export class HomeComponent implements OnInit {
 
     const userId = this.loginService.getUserId();
     this.httpService
-      .get<any>(`${environment.apiUrl}/user/${userId}`, true)
+      .get<User>(`${environment.apiUrl}/user/${userId}`, true)
       .subscribe({
         next: (resp: any) => {
-          this.currentUser = resp.data.user;
+          this.currentUser = resp.data.user[0];
+          // console.log(resp.data.user[0]);
         },
         error: (error) => {},
         complete: () => {},
@@ -68,11 +70,11 @@ export class HomeComponent implements OnInit {
 
   loadSuggestions(): void {
     this.httpService
-      .get<any>(`${environment.apiUrl}/user/all-users`, true)
+      .get<User[]>(`${environment.apiUrl}/user/all-users`, true)
       .subscribe({
         next: (resp: any) => {
           const allUsers = resp.data.users;
-          const resultSuggestion = allUsers.filter((user: any) => {
+          const resultSuggestion = allUsers.filter((user: User) => {
             return user.username !== this.currentUser.username;
           });
           if (resultSuggestion.length > 5) {
@@ -91,7 +93,7 @@ export class HomeComponent implements OnInit {
   crearPublicacion() {
     const dialogRef = this.dialog.open(CrearPublicacionComponent, {
       disableClose: false,
-      data: { user: this.currentUser[0] },
+      data: { user: this.currentUser },
     });
 
     dialogRef.afterClosed().subscribe((result) => {});

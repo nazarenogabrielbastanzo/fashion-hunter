@@ -15,13 +15,13 @@ const userData = new FormData();
 })
 export class CrearCuentaComponent implements OnInit {
 
-  firstName: any;
-  lastName: any;
-  username: any;
-  email: any;
-  password: any;
-  passwordConfirm: any;
-  userImg: any;
+  firstName!: string;
+  lastName!: string;
+  username!: string;
+  email!: string;
+  password!: string;
+  passwordConfirm!: string;
+  userImg!: File;
   previsualizacion: string;
 
   constructor(

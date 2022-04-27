@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpConfigService } from 'src/app/services/http-config.service';
 import { LoginService } from 'src/app/services/login.service';
 import { environment } from 'src/environments/environment';
+import { User } from '../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProfileComponent implements OnInit {
 
-  user: any;
+  user!: User;
 
   constructor(private cookies: CookieService,
     private router: Router,
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.loginService.getUserId();
 
-    this.httpService.get<any>(`${environment.apiUrl}/user/${userId}`, true)
+    this.httpService.get<User>(`${environment.apiUrl}/user/${userId}`, true)
     .subscribe({
       next: (resp: any) => {
         this.user = resp.data.user[0];
