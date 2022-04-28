@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   oculto = true;
   posts!: Array<any>;
   numLikes!: number;
+  notificationsHidden = true;
 
   constructor(
     private _title: Title,

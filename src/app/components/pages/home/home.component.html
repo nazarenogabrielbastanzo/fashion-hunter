@@ -22,7 +22,7 @@
     (click)="oculto = !oculto"
   />
   <img src="assets/images/icons/chat.png" alt="" [routerLink]="['/mensajes']" />
-  <img src="assets/images/icons/heart.png" alt="" [routerLink]="['/home']" />
+  <img src="assets/images/icons/heart.png" alt="" (click)="notificationsHidden = !notificationsHidden" />
 </div>
 
 <!-- Suggestions -->
@@ -37,10 +37,68 @@
   </div>
 </div>
 
+<!-- Crear nuevo... -->
 <div
   class="crear-publicacion animate__animated animate__faster"
   [ngClass]="{ 'animate__fadeInRight crear-visible': !oculto }"
 >
   <button (click)="crearPublicacion()">Crear publicación</button>
   <button (click)="editarPerfil()">Editar perfil</button>
+</div>
+
+<!-- Overlay Notifications -->
+<div
+  class="overlay-notifications animate__animated animate__faster"
+  [ngClass]="{
+    'animate__fadeInRight overlay-notifications-visible': !notificationsHidden
+  }"
+>
+  <h2>Notificaciones</h2>
+  <div class="horizontal-line"></div>
+  <div class="notification">
+    <img
+      src="assets/images/avatar/joaquin.png"
+      alt=""
+    />
+    <strong class="user-fullname">Joaquín Lewis</strong>
+    <span>Ha comentado tu foto</span>
+    <img src="assets/images/icons/right_arrow.png" alt="" />
+  </div>
+  <div class="notification">
+    <img
+      src="assets/images/avatar/joaquin.png"
+      alt=""
+    />
+    <strong class="user-fullname">Joaquín Lewis</strong>
+    <span>Ha comentado tu foto</span>
+    <img src="assets/images/icons/right_arrow.png" alt="" />
+  </div>
+  <div class="notification">
+    <img
+      src="assets/images/avatar/joaquin.png"
+      alt=""
+    />
+    <strong class="user-fullname">Joaquín Lewis</strong>
+    <span>Ha comentado tu foto</span>
+    <img src="assets/images/icons/right_arrow.png" alt="" />
+  </div>
+  <div class="notification">
+    <img
+      src="assets/images/avatar/joaquin.png"
+      alt=""
+    />
+    <strong class="user-fullname">Joaquín Lewis</strong>
+    <span>Le gustó tu foto</span>
+    <img src="assets/images/icons/right_arrow.png" alt="" />
+  </div>
+  <div class="notification">
+    <img
+      src="assets/images/avatar/joaquin.png"
+      alt=""
+    />
+    <strong class="user-fullname">Joaquín Lewis</strong>
+    <span>Le gustó tu foto</span>
+    <img src="assets/images/icons/right_arrow.png" alt="" />
+  </div>
+  <div class="horizontal-line"></div>
 </div>
