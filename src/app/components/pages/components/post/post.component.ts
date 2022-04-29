@@ -8,6 +8,8 @@ import * as moment from 'moment';
 import { Observable, tap, BehaviorSubject } from 'rxjs';
 import { HttpConfigService } from 'src/app/services/http-config.service';
 import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalCommentsComponent } from '../modal-comments/modal-comments.component';
 
 @Component({
   selector: 'app-post',
@@ -21,7 +23,10 @@ export class PostComponent implements OnInit {
   likesSubject = new BehaviorSubject<number>(0);
   numLikes: any;
 
-  constructor(private httpService: HttpConfigService) {
+  constructor(
+    private httpService: HttpConfigService,
+    private dialog: MatDialog
+  ) {
     moment.locale('es');
   }
 
@@ -57,5 +62,13 @@ export class PostComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  newComment() {
+    const dialogRef = this.dialog.open(ModalCommentsComponent, {
+      disableClose: false,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

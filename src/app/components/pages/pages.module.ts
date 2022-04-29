@@ -21,6 +21,7 @@ import { CambioContraComponent } from './cambio-contra/cambio-contra.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 import { PrivacidadComponent } from './privacidad/privacidad.component';
 import { PostComponent } from './components/post/post.component';
+import { ModalCommentsComponent } from './components/modal-comments/modal-comments.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PostComponent } from './components/post/post.component';
     CambioContraComponent,
     NotificacionesComponent,
     PrivacidadComponent,
-    PostComponent
+    PostComponent,
+    ModalCommentsComponent
   ],
   imports: [
     CommonModule,

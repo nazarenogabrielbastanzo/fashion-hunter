@@ -32,7 +32,12 @@
       class="arrow-down"
       (click)="disLike(post?._id, post?.numLikes)"
     />
-    <img src="assets/images/icons/chat1.png" alt="" class="chat-icon" />
+    <img
+      src="assets/images/icons/chat1.png"
+      alt=""
+      class="chat-icon"
+      (click)="newComment()"
+    />
     <div
       class="favorites"
       *ngIf="{
