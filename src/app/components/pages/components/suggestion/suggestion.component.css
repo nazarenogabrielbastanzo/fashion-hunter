@@ -1,0 +1,28 @@
+.suggestion {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  padding: 10px 12px;
+  align-items: center;
+}
+.suggestion-name,
+.follow,
+.suggestion img {
+  margin: auto 10px;
+}
+.suggestion-name {
+  white-space: nowrap;
+}
+.follow {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.suggestion img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+.amigo {
+  color: var(--secondary-color);
+}

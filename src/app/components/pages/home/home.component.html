@@ -22,19 +22,20 @@
     (click)="oculto = !oculto"
   />
   <img src="assets/images/icons/chat.png" alt="" [routerLink]="['/mensajes']" />
-  <img src="assets/images/icons/heart.png" alt="" (click)="notificationsHidden = !notificationsHidden" />
+  <img
+    src="assets/images/icons/heart.png"
+    alt=""
+    (click)="notificationsHidden = !notificationsHidden"
+  />
 </div>
 
 <!-- Suggestions -->
 <div class="suggestions" *ngIf="suggestions.length">
   <p class="suggestions-title">Sugerencias para ti</p>
-  <div class="suggestion" *ngFor="let suggestion of suggestions; let i = index">
-    <img [src]="suggestion['img']" alt="Suggestion {{ i + 1 }}" />
-    <span class="suggestion-name"
-      >{{ suggestion["firstName"] }}&nbsp;{{ suggestion["lastName"] }}</span
-    >
-    <span class="follow">Seguir</span>
-  </div>
+  <app-suggestion
+    *ngFor="let suggestion of suggestions"
+    [suggestion]="suggestion"
+  ></app-suggestion>
 </div>
 
 <!-- Crear nuevo... -->
@@ -56,46 +57,31 @@
   <h2>Notificaciones</h2>
   <div class="horizontal-line"></div>
   <div class="notification">
-    <img
-      src="assets/images/avatar/joaquin.png"
-      alt=""
-    />
+    <img src="assets/images/avatar/joaquin.png" alt="" />
     <strong class="user-fullname">Joaquín Lewis</strong>
     <span>Ha comentado tu foto</span>
     <img src="assets/images/icons/right_arrow.png" alt="" />
   </div>
   <div class="notification">
-    <img
-      src="assets/images/avatar/joaquin.png"
-      alt=""
-    />
+    <img src="assets/images/avatar/joaquin.png" alt="" />
     <strong class="user-fullname">Joaquín Lewis</strong>
     <span>Ha comentado tu foto</span>
     <img src="assets/images/icons/right_arrow.png" alt="" />
   </div>
   <div class="notification">
-    <img
-      src="assets/images/avatar/joaquin.png"
-      alt=""
-    />
+    <img src="assets/images/avatar/joaquin.png" alt="" />
     <strong class="user-fullname">Joaquín Lewis</strong>
     <span>Ha comentado tu foto</span>
     <img src="assets/images/icons/right_arrow.png" alt="" />
   </div>
   <div class="notification">
-    <img
-      src="assets/images/avatar/joaquin.png"
-      alt=""
-    />
+    <img src="assets/images/avatar/joaquin.png" alt="" />
     <strong class="user-fullname">Joaquín Lewis</strong>
     <span>Le gustó tu foto</span>
     <img src="assets/images/icons/right_arrow.png" alt="" />
   </div>
   <div class="notification">
-    <img
-      src="assets/images/avatar/joaquin.png"
-      alt=""
-    />
+    <img src="assets/images/avatar/joaquin.png" alt="" />
     <strong class="user-fullname">Joaquín Lewis</strong>
     <span>Le gustó tu foto</span>
     <img src="assets/images/icons/right_arrow.png" alt="" />

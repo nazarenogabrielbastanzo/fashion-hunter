@@ -22,6 +22,7 @@ import { NotificacionesComponent } from './notificaciones/notificaciones.compone
 import { PrivacidadComponent } from './privacidad/privacidad.component';
 import { PostComponent } from './components/post/post.component';
 import { ModalCommentsComponent } from './components/modal-comments/modal-comments.component';
+import { SuggestionComponent } from './components/suggestion/suggestion.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ModalCommentsComponent } from './components/modal-comments/modal-commen
     NotificacionesComponent,
     PrivacidadComponent,
     PostComponent,
-    ModalCommentsComponent
+    ModalCommentsComponent,
+    SuggestionComponent
   ],
   imports: [
     CommonModule,
