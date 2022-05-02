@@ -15,7 +15,7 @@ export class PostsComponent implements OnInit {
       .getPosts()
       .pipe(
         tap((res: any) => {
-          console.log(res.data.resolvedPost);
+          // console.log(res.data.resolvedPost);
           this.posts$ = this.postSvc.posts$;
         })
       )

@@ -34,7 +34,7 @@ export class CreandoPublicacionComponent implements OnInit {
       .pipe(
         mergeMap((res: any) => zip(of(res), this.postSvc.createPost(formData))),
         map((res: any) => {
-          console.log(res);
+          // console.log(res);
           this.postSvc.postsSource.next(res[0].data.resolvedPost);
         })
       )
@@ -51,7 +51,7 @@ export class CreandoPublicacionComponent implements OnInit {
           this.message = 'Listo!';
         }),
         tap((res: any) => {
-          console.log(res);
+          // console.log(res);
 
           this.postSvc.postsSource.next(res.createPost);
         })
