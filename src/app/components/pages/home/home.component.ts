@@ -1,13 +1,14 @@
 import { environment } from './../../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { HttpConfigService } from '../../../services/http-config.service';
-import { delay, of, tap } from 'rxjs';
+import { delay, Observable, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearPublicacionComponent } from '../components/crear-publicacion/crear-publicacion.component';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
 import { User } from '../../../interfaces/user.interface';
+import { PostService } from '../../../services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   currentUser!: User;
   oculto = true;
   posts!: Array<any>;
+  posts$!: Observable<any[]>;
   numLikes!: number;
   notificationsHidden = true;
 
@@ -27,7 +29,8 @@ export class HomeComponent implements OnInit {
     private httpService: HttpConfigService,
     private loginService: LoginService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private postSvc: PostService
   ) {
     this._title.setTitle('Fashion Hunter - Home');
 
@@ -58,13 +61,7 @@ export class HomeComponent implements OnInit {
         complete: () => {},
       });
 
-    this.listarPosts().subscribe({
-      next: (posts: any) => {
-        this.posts = posts.data.resolvedPost;
-      },
-      error: (error: any) => {},
-      complete: () => {},
-    });
+
   }
 
   ngOnInit(): void {}
@@ -104,7 +101,11 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/editar-perfil']);
   }
 
-  listarPosts() {
-    return this.httpService.get(`${environment.apiUrl}/posts`, true);
+  guardadas() {
+    this.router.navigate(['/guardadas']);
+  }
+
+  mensajes() {
+    this.router.navigate(['/mensajes']);
   }
 }

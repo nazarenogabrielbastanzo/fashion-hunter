@@ -6,7 +6,7 @@ import {
 } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 import { HttpConfigService } from '../../../../services/http-config.service';
-import { tap } from 'rxjs';
+import { tap, delay, mergeMap, zip, of, map } from 'rxjs';
 import { PostService } from '../../../../services/post.service';
 
 const formData = new FormData();
@@ -29,25 +29,40 @@ export class CreandoPublicacionComponent implements OnInit {
     formData.append('description', this.data.description);
     formData.append('postImg', this.data.foto);
 
-    this.postSvc.createPost(formData)
+    this.postSvc
+      .getPosts()
       .pipe(
-        tap((resp: any) => {console.log(resp);})
+        mergeMap((res: any) => zip(of(res), this.postSvc.createPost(formData))),
+        map((res: any) => {
+          console.log(res);
+          this.postSvc.postsSource.next(res[0].data.resolvedPost);
+        })
       )
-      .subscribe({
-        next: (resp) => {
+      .subscribe();
+
+    /* this.postSvc
+      .createPost(formData)
+      .pipe(
+        tap(() => {
           this.progress = 100;
-        },
-        error: (error) => {},
-        complete: () => {
+        }),
+        delay(500),
+        tap(() => {
           this.message = 'Listo!';
-        },
-      });
+        }),
+        tap((res: any) => {
+          console.log(res);
+
+          this.postSvc.postsSource.next(res.createPost);
+        })
+      )
+      .subscribe(); */
   }
 
   ngOnInit(): void {}
 
   goHome() {
-    // this.dialog.closeAll();
-    window.location.reload();
+    this.dialog.closeAll();
+    // window.location.reload();
   }
 }

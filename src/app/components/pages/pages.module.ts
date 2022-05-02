@@ -23,6 +23,7 @@ import { PrivacidadComponent } from './privacidad/privacidad.component';
 import { PostComponent } from './components/post/post.component';
 import { ModalCommentsComponent } from './components/modal-comments/modal-comments.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
     PrivacidadComponent,
     PostComponent,
     ModalCommentsComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    PostsComponent
   ],
   imports: [
     CommonModule,

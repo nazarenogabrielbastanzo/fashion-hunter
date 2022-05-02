@@ -15,7 +15,7 @@ import { ModalCommentsComponent } from '../modal-comments/modal-comments.compone
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostComponent implements OnInit {
   @Input() post!: any;

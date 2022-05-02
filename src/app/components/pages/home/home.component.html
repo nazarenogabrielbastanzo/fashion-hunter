@@ -1,27 +1,18 @@
 <!-- Header -->
 <app-header></app-header>
 
-<div class="container">
-  <!-- Post n -->
-  <div class="posts-container" *ngFor="let post of posts">
-    <app-post [post]="post"></app-post>
-  </div>
-</div>
+<app-posts></app-posts>
 
 <!-- Shortcuts -->
 <div class="shortcuts">
-  <img
-    src="assets/images/icons/Favorite.png"
-    alt=""
-    [routerLink]="['/guardadas']"
-  />
+  <img src="assets/images/icons/Favorite.png" alt="" (click)="guardadas()" />
   <img
     src="assets/images/icons/Add_New.png"
     alt=""
     class="add-new-icon"
     (click)="oculto = !oculto"
   />
-  <img src="assets/images/icons/chat.png" alt="" [routerLink]="['/mensajes']" />
+  <img src="assets/images/icons/chat.png" alt="" (click)="mensajes()" />
   <img
     src="assets/images/icons/heart.png"
     alt=""
