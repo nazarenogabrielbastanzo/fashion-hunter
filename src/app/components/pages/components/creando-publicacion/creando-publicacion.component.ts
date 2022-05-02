@@ -29,7 +29,7 @@ export class CreandoPublicacionComponent implements OnInit {
     formData.append('description', this.data.description);
     formData.append('postImg', this.data.foto);
 
-    this.postSvc
+    /* this.postSvc
       .getPosts()
       .pipe(
         mergeMap((res: any) => zip(of(res), this.postSvc.createPost(formData))),
@@ -38,9 +38,9 @@ export class CreandoPublicacionComponent implements OnInit {
           this.postSvc.postsSource.next(res[0].data.resolvedPost);
         })
       )
-      .subscribe();
+      .subscribe(); */
 
-    /* this.postSvc
+    this.postSvc
       .createPost(formData)
       .pipe(
         tap(() => {
@@ -50,13 +50,14 @@ export class CreandoPublicacionComponent implements OnInit {
         tap(() => {
           this.message = 'Listo!';
         }),
-        tap((res: any) => {
+        delay(1000),
+        mergeMap((res: any) => zip(of(res), this.postSvc.getPosts())),
+        map((res: any) => {
           // console.log(res);
-
-          this.postSvc.postsSource.next(res.createPost);
+          this.postSvc.postsSource.next(res[1].data.resolvedPost);
         })
       )
-      .subscribe(); */
+      .subscribe();
   }
 
   ngOnInit(): void {}
