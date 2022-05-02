@@ -10,7 +10,7 @@
     <p>Periodista de moda</p>
     <p>La moda no sólo existe en los vestidos.</p>
     <hr />
-    <strong>6 Publicaciones</strong>
+    <strong *ngIf="publicaciones">{{ publicaciones.length }} publicaciones</strong>
     <strong>165 Amigos</strong>
     <strong>300 seguidos</strong>
   </div>
@@ -20,27 +20,10 @@
   </div>
 </section>
 <section class="publicaciones">
-  <div class="grid-container">
-    <div class="grid-item">
-      <img src="assets/images/profile/post1.jpg" />
-      <p>Producción de fotos</p>
-    </div>
-    <div class="grid-item">
-      <img src="assets/images/profile/post5.jpg" />
-      <p>Noche de casamiento Lucia y Marcos</p>
-    </div>
-    <div class="grid-item">
-      <img src="assets/images/profile/post2.jpg" />
-      <p>Gold</p>
-    </div>
-    <div class="grid-item">
-      <img src="assets/images/profile/post3.jpg" />
-    </div>
-    <div class="grid-item">
-      <img src="assets/images/profile/post4.jpg" />
-    </div>
-    <div class="grid-item">
-      <img src="assets/images/profile/post6.jpg" />
+  <div class="grid-container" *ngIf="publicaciones">
+    <div class="grid-item" *ngFor="let publicacion of publicaciones">
+      <img [src]="publicacion?.image" />
+      <p>{{ publicacion?.description }}</p>
     </div>
   </div>
 </section>

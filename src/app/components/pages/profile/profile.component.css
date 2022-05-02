@@ -97,6 +97,7 @@ strong {
   width: 16em;
   height: 18em;
   border-radius: 15px;
+  object-fit: cover;
 }
 
 .grid-item:hover {
@@ -356,7 +357,7 @@ strong {
   }
 
   strong {
-    margin-right: 5em;
+    margin-right: 3.5em;
   }
   .fas {
     color: #ffff;
