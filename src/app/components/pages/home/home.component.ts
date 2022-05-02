@@ -1,14 +1,13 @@
 import { environment } from './../../../../environments/environment';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { HttpConfigService } from '../../../services/http-config.service';
-import { delay, Observable, of, tap } from 'rxjs';
+import { delay, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearPublicacionComponent } from '../components/crear-publicacion/crear-publicacion.component';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
 import { User } from '../../../interfaces/user.interface';
-import { PostService } from '../../../services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +18,6 @@ export class HomeComponent implements OnInit {
   suggestions = [];
   currentUser!: User;
   oculto = true;
-  posts!: Array<any>;
-  posts$!: Observable<any[]>;
   numLikes!: number;
   notificationsHidden = true;
 
@@ -29,8 +26,7 @@ export class HomeComponent implements OnInit {
     private httpService: HttpConfigService,
     private loginService: LoginService,
     private dialog: MatDialog,
-    private router: Router,
-    private postSvc: PostService
+    private router: Router
   ) {
     this._title.setTitle('Fashion Hunter - Home');
 
@@ -43,11 +39,7 @@ export class HomeComponent implements OnInit {
       })
     );
 
-    observablePattern.subscribe({
-      next: (resp) => {},
-      error: (error) => {},
-      complete: () => {},
-    });
+    observablePattern.subscribe();
 
     const userId = this.loginService.getUserId();
     this.httpService
@@ -60,8 +52,6 @@ export class HomeComponent implements OnInit {
         error: (error) => {},
         complete: () => {},
       });
-
-
   }
 
   ngOnInit(): void {}
