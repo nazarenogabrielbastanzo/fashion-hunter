@@ -1,56 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { Observable, tap } from 'rxjs';
-import { HttpConfigService } from 'src/app/services/http-config.service';
+import { tap } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
-import { environment } from 'src/environments/environment';
 import { User } from '../../../interfaces/user.interface';
+import { PostService } from '../../../services/post.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-
   user!: User;
   publicaciones!: any[];
 
-  constructor(private cookies: CookieService,
-    private router: Router,
-    private httpService: HttpConfigService,
-    private loginService: LoginService) {
-
-    }
+  constructor(
+    private loginSvc: LoginService,
+    private postSvc: PostService,
+    private userSvc: UserService
+  ) {}
 
   ngOnInit(): void {
-    const userId = this.loginService.getUserId();
+    const userId = this.loginSvc.getUserId();
 
-    this.httpService.get<User>(`${environment.apiUrl}/user/${userId}`, true)
-    .subscribe({
-      next: (resp: any) => {
-        this.user = resp.data.user[0];
-      },
-      error: error => { },
-      complete: () => { }
-    });
+    this.userSvc
+      .getUserById(userId)
+      .pipe(
+        tap((res: any) => {
+          this.user = res.data.user[0];
+        })
+      )
+      .subscribe();
 
-    this.getPostByUser(userId)
+    this.postSvc
+      .getPostByUser(userId)
       .pipe(
         tap((res: any) => {
           console.log(res.data.posts);
           this.publicaciones = res.data.posts;
         })
-      ).subscribe();
+      )
+      .subscribe();
   }
 
-  goBack() {
+  goBack(): void {
     window.history.back();
   }
-
-  getPostByUser(userId: string): Observable<any[]> {
-    return this.httpService.get(`${environment.apiUrl}/posts/userPost/${userId}`, true);
-  }
-
 }

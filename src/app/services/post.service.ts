@@ -27,4 +27,8 @@ export class PostService {
   getPosts(): Observable<any> {
     return this.httpSvc.get(`${environment.apiUrl}/posts`, true);
   }
+
+  getPostByUser(userId: string): Observable<any[]> {
+    return this.httpSvc.get(`${environment.apiUrl}/posts/userPost/${userId}`, true);
+  }
 }
