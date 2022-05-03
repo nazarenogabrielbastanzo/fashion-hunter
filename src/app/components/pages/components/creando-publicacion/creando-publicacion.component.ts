@@ -4,8 +4,6 @@ import {
   MAT_DIALOG_DATA,
   MatDialog,
 } from '@angular/material/dialog';
-import { environment } from 'src/environments/environment';
-import { HttpConfigService } from '../../../../services/http-config.service';
 import { tap, delay, mergeMap, zip, of, map } from 'rxjs';
 import { PostService } from '../../../../services/post.service';
 
@@ -28,17 +26,6 @@ export class CreandoPublicacionComponent implements OnInit {
   ) {
     formData.append('description', this.data.description);
     formData.append('postImg', this.data.foto);
-
-    /* this.postSvc
-      .getPosts()
-      .pipe(
-        mergeMap((res: any) => zip(of(res), this.postSvc.createPost(formData))),
-        map((res: any) => {
-          // console.log(res);
-          this.postSvc.postsSource.next(res[0].data.resolvedPost);
-        })
-      )
-      .subscribe(); */
 
     this.postSvc
       .createPost(formData)

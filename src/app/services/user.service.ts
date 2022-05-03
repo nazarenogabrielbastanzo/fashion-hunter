@@ -5,15 +5,19 @@ import { HttpConfigService } from './http-config.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(
-    private httpSvc: HttpConfigService
-  ) { }
+  constructor(private httpSvc: HttpConfigService) {}
 
   getUserById(userId: string): Observable<User> {
-    return this.httpSvc.get<User>(`${environment.apiUrl}/user/${userId}`, true)
+    return this.httpSvc.get<User>(`${environment.apiUrl}/user/${userId}`, true);
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.httpSvc.get<User[]>(
+      `${environment.apiUrl}/user/all-users`,
+      true
+    );
   }
 }

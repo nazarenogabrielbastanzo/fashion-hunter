@@ -1,13 +1,12 @@
-import { environment } from './../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { HttpConfigService } from '../../../services/http-config.service';
-import { delay, of, tap } from 'rxjs';
+import { delay, of, tap, mergeMap, zip, map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearPublicacionComponent } from '../components/crear-publicacion/crear-publicacion.component';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
 import { User } from '../../../interfaces/user.interface';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -20,16 +19,21 @@ export class HomeComponent implements OnInit {
   oculto = true;
   numLikes!: number;
   notificationsHidden = true;
+  private userId: string;
 
   constructor(
     private _title: Title,
-    private httpService: HttpConfigService,
-    private loginService: LoginService,
+    private loginSvc: LoginService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private userSvc: UserService
   ) {
-    this._title.setTitle('Fashion Hunter - Home');
+    this.userId = this.loginSvc.getUserId();
 
+    this._title.setTitle('Fashion Hunter - Home');
+  }
+
+  ngOnInit(): void {
     const observablePattern = of(true).pipe(
       delay(2000),
       tap(() => {
@@ -41,29 +45,28 @@ export class HomeComponent implements OnInit {
 
     observablePattern.subscribe();
 
-    const userId = this.loginService.getUserId();
-    this.httpService
-      .get<User>(`${environment.apiUrl}/user/${userId}`, true)
-      .subscribe({
-        next: (resp: any) => {
-          this.currentUser = resp.data.user[0];
-          // console.log(resp.data.user[0]);
-        },
-        error: (error) => {},
-        complete: () => {},
-      });
+    this.userSvc
+      .getUserById(this.userId)
+      .pipe(
+        tap((res: any) => {
+          this.currentUser = res.data.user[0];
+        })
+      )
+      .subscribe();
   }
 
-  ngOnInit(): void {}
-
   loadSuggestions(): void {
-    this.httpService
-      .get<User[]>(`${environment.apiUrl}/user/all-users`, true)
-      .subscribe({
-        next: (resp: any) => {
-          const allUsers = resp.data.users;
+    this.userSvc
+      .getAllUsers()
+      .pipe(
+        mergeMap((res: any) =>
+          zip(of(res), this.userSvc.getUserById(this.userId))
+        ),
+        map((res: any) => {
+          // console.log(res);
+          const allUsers = res[0].data.users;
           const resultSuggestion = allUsers.filter((user: User) => {
-            return user.username !== this.currentUser.username;
+            return user.username !== res[1].data.user[0].username;
           });
           if (resultSuggestion.length > 5) {
             this.suggestions = resultSuggestion.slice(
@@ -72,10 +75,9 @@ export class HomeComponent implements OnInit {
           } else {
             this.suggestions = resultSuggestion;
           }
-        },
-        error: (error) => {},
-        complete: () => {},
-      });
+        })
+      )
+      .subscribe();
   }
 
   crearPublicacion() {

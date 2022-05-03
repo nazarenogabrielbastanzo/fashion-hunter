@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { HttpConfigService } from '../../../../services/http-config.service';
 import { LoginService } from '../../../../services/login.service';
 import { User } from '../../../../interfaces/user.interface';
+import { UserService } from '../../../../services/user.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -15,30 +15,29 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private httpService: HttpConfigService,
-    private loginService: LoginService
-  ) {
-    const userId = this.loginService.getUserId();
+    private loginSvc: LoginService,
+    private userSvc: UserService
+  ) { }
 
-    this.httpService
-      .get<User>(`${environment.apiUrl}/user/${userId}`, true)
-      .subscribe({
-        next: (resp: any) => {
-          this.user = resp.data.user[0];
-        },
-        error: (error) => {},
-        complete: () => {},
-      });
+  ngOnInit(): void {
+    const userId = this.loginSvc.getUserId();
+
+    this.userSvc
+      .getUserById(userId)
+      .pipe(
+        tap((res: any) => {
+          this.user = res.data.user[0];
+        })
+      )
+      .subscribe();
   }
-
-  ngOnInit(): void {}
 
   goHome(): void {
     this.router.navigate(['/home']);
   }
 
   logOut() {
-    this.loginService.logOut();
+    this.loginSvc.logOut();
   }
 
   viewProfile() {
