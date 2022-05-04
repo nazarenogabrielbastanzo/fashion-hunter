@@ -12,18 +12,20 @@ import { tap } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   user!: User;
+  private userId: string;
 
   constructor(
     private router: Router,
     private loginSvc: LoginService,
     private userSvc: UserService
-  ) { }
+  ) {
+    this.userId = this.loginSvc.getUserId();
+  }
 
   ngOnInit(): void {
-    const userId = this.loginSvc.getUserId();
 
     this.userSvc
-      .getUserById(userId)
+      .getUserById(this.userId)
       .pipe(
         tap((res: any) => {
           this.user = res.data.user[0];

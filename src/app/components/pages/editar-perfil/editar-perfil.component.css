@@ -49,6 +49,7 @@ h3::before {
   height: 132px;
   border: 2px solid #7f1f71;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 #cambiar-foto {

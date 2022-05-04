@@ -13,18 +13,20 @@ import { UserService } from '../../../services/user.service';
 export class ProfileComponent implements OnInit {
   user!: User;
   publicaciones!: any[];
+  private userId: string;
 
   constructor(
     private loginSvc: LoginService,
     private postSvc: PostService,
     private userSvc: UserService
-  ) {}
+  ) {
+    this.userId = this.loginSvc.getUserId();
+  }
 
   ngOnInit(): void {
-    const userId = this.loginSvc.getUserId();
 
     this.userSvc
-      .getUserById(userId)
+      .getUserById(this.userId)
       .pipe(
         tap((res: any) => {
           this.user = res.data.user[0];
@@ -33,7 +35,7 @@ export class ProfileComponent implements OnInit {
       .subscribe();
 
     this.postSvc
-      .getPostByUser(userId)
+      .getPostByUser(this.userId)
       .pipe(
         tap((res: any) => {
           console.log(res.data.posts);

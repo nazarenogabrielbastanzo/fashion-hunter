@@ -65,9 +65,9 @@ export class HomeComponent implements OnInit {
         map((res: any) => {
           // console.log(res);
           const allUsers = res[0].data.users;
-          const resultSuggestion = allUsers.filter((user: User) => {
-            return user.username !== res[1].data.user[0].username;
-          });
+          const resultSuggestion = allUsers.filter(
+            (user: User) => user.username !== res[1].data.user[0].username
+          );
           if (resultSuggestion.length > 5) {
             this.suggestions = resultSuggestion.slice(
               resultSuggestion.length - 5

@@ -21,6 +21,7 @@ export class MensajesComponent implements OnInit {
   user!: User;
   outcomingMessages: any[] = [];
   userImg!: string;
+  private userId;
 
   constructor(
     private router: Router,
@@ -28,6 +29,7 @@ export class MensajesComponent implements OnInit {
     private httpService: HttpConfigService,
     private _title: Title
   ) {
+    this.userId = this.loginService.getUserId();
     this._title.setTitle('Fashion Hunter - Mensajes');
     this.viewEmojis = false;
     this.message = '';
@@ -36,10 +38,8 @@ export class MensajesComponent implements OnInit {
   ngOnInit() {
     this.scrollToBottom();
 
-    const userId = this.loginService.getUserId();
-
     this.httpService
-      .get<User>(`${environment.apiUrl}/user/${userId}`, true)
+      .get<User>(`${environment.apiUrl}/user/${this.userId}`, true)
       .subscribe({
         next: (resp: any) => {
           this.user = resp.data.user[0];
@@ -72,10 +72,8 @@ export class MensajesComponent implements OnInit {
 
   sendMessage(message: string) {
 
-    const userId = this.loginService.getUserId();
-
     this.httpService
-      .get<User>(`${environment.apiUrl}/user/${userId}`, true)
+      .get<User>(`${environment.apiUrl}/user/${this.userId}`, true)
       .subscribe({
         next: (resp: any) => {
 

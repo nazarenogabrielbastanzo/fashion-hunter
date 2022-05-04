@@ -15,15 +15,16 @@ export class EditarPerfilComponent implements OnInit {
   lastName: any;
   email: any;
   user!: User;
+  private userId;
 
   constructor(
     private loginService: LoginService,
     private userSvc: UserService
   ) {
-    const userId = this.loginService.getUserId();
+    this.userId = this.loginService.getUserId();
 
     this.userSvc
-      .getUserById(userId)
+      .getUserById(this.userId)
       .pipe(
         tap((res: any) => {
           this.user = res.data.user[0];
