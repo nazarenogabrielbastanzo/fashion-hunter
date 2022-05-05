@@ -41,6 +41,7 @@ libpeerconnection.log
 testem.log
 typings
 *.local.ts
+.vscode/*
 
 # System files
 .DS_Store
