@@ -15,7 +15,6 @@ import { UserService } from '../../../services/user.service';
 })
 export class HomeComponent implements OnInit {
   suggestions = [];
-  currentUser!: User;
   oculto = true;
   numLikes!: number;
   notificationsHidden = true;
