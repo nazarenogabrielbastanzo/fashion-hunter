@@ -44,15 +44,6 @@ export class HomeComponent implements OnInit {
     );
 
     observablePattern.subscribe();
-
-    this.userSvc
-      .getUserById(this.userId)
-      .pipe(
-        tap((res: any) => {
-          this.currentUser = res.data.user[0];
-        })
-      )
-      .subscribe();
   }
 
   loadSuggestions(): void {
@@ -81,12 +72,19 @@ export class HomeComponent implements OnInit {
   }
 
   crearPublicacion() {
-    const dialogRef = this.dialog.open(CrearPublicacionComponent, {
-      disableClose: false,
-      data: { user: this.currentUser },
-    });
+    this.userSvc
+      .getUserById(this.userId)
+      .pipe(
+        tap((res: any) => {
+          const dialogRef = this.dialog.open(CrearPublicacionComponent, {
+            disableClose: false,
+            data: { user: res.data.user[0] },
+          });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+          dialogRef.afterClosed().subscribe((result) => {});
+        })
+      )
+      .subscribe();
   }
 
   editarPerfil() {
