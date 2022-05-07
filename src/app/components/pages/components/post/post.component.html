@@ -58,7 +58,7 @@
         *ngIf="post?.numLikes && !likes.numLikes"
         >{{ post?.numLikes }}</span
       >
-      <img src="assets/images/icons/Favorite.png" alt="" />
+      <img src="assets/images/icons/Favorite.png" alt="" (click)="addToFavorites(post?._id)" />
     </div>
   </div>
 </div>

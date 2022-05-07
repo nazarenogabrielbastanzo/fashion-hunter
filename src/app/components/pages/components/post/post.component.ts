@@ -10,6 +10,7 @@ import { HttpConfigService } from 'src/app/services/http-config.service';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalCommentsComponent } from '../modal-comments/modal-comments.component';
+import { PostService } from '../../../../services/post.service';
 
 @Component({
   selector: 'app-post',
@@ -25,7 +26,8 @@ export class PostComponent implements OnInit {
 
   constructor(
     private httpService: HttpConfigService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private postSvc: PostService
   ) {
     moment.locale('es');
   }
@@ -70,5 +72,16 @@ export class PostComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  addToFavorites(postId: string): void {
+    this.postSvc.addFavoritePost(postId)
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+
+        })
+      )
+      .subscribe();
   }
 }

@@ -21,14 +21,22 @@ export class PostService {
 
   createPost(formData: any): Observable<any> {
     return this.httpSvc
-      .post(`${environment.apiUrl}/posts`, formData, true);
+      .post<any>(`${environment.apiUrl}/posts`, formData, true);
   }
 
   getPosts(): Observable<any> {
-    return this.httpSvc.get(`${environment.apiUrl}/posts`, true);
+    return this.httpSvc.get<any>(`${environment.apiUrl}/posts`, true);
   }
 
   getPostByUser(userId: string): Observable<any[]> {
-    return this.httpSvc.get(`${environment.apiUrl}/posts/userPost/${userId}`, true);
+    return this.httpSvc.get<any[]>(`${environment.apiUrl}/posts/userPost/${userId}`, true);
+  }
+
+  getFavoritePosts(): Observable<any[]> {
+    return this.httpSvc.get<any[]>(`${environment.apiUrl}/posts/get-favorite-picture`, true);
+  }
+
+  addFavoritePost(postId: string): Observable<any> {
+    return this.httpSvc.post<any>(`${environment.apiUrl}/posts/favorite-picture/${postId}`, {}, true);
   }
 }
