@@ -10,6 +10,8 @@ import { tap } from 'rxjs';
   styleUrls: ['./guardadas.component.css'],
 })
 export class GuardadasComponent implements OnInit {
+  guardadas!: any[]
+
   constructor(
     private router: Router,
     private _title: Title,
@@ -20,8 +22,8 @@ export class GuardadasComponent implements OnInit {
     this._title.setTitle('Fashion Hunter - Guardadas');
     this.postsSvc.getFavoritePosts().pipe(
       tap((res: any) => {
-        console.log(res);
-
+        // console.log(res);
+        this.guardadas = res.data.favorites;
       })
     ).subscribe()
   }

@@ -75,13 +75,6 @@ export class PostComponent implements OnInit {
   }
 
   addToFavorites(postId: string): void {
-    this.postSvc.addFavoritePost(postId)
-      .pipe(
-        tap((res: any) => {
-          console.log(res);
-
-        })
-      )
-      .subscribe();
+    this.postSvc.addFavoritePost(postId).subscribe();
   }
 }

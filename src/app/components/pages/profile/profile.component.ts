@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
       .getPostByUser(this.userId)
       .pipe(
         tap((res: any) => {
-          console.log(res.data.posts);
+          // console.log(res.data.posts);
           this.publicaciones = res.data.posts;
         })
       )

@@ -8,15 +8,15 @@
   </div>
 
   <!-- Guardadas -->
-  <div class="saved-container">
-    <div class="saved-item">
+  <div class="saved-container" *ngIf="guardadas">
+    <div class="saved-item" *ngFor="let guardada of guardadas">
       <img
-        src="assets/images/guardadas/reza-delkhosh-T7PWyUVwfGg-unsplash.jpg"
+        [src]="guardada?.image"
         alt=""
       />
       <small>Hace 30 minutos</small>
     </div>
-    <div class="saved-item">
+    <!-- <div class="saved-item">
       <img
         src="assets/images/guardadas/gordon-cowie-B75bd6qoSqQ-unsplash.jpg"
         alt=""
@@ -64,6 +64,6 @@
         alt=""
       />
       <small>Hace 2 meses</small>
-    </div>
+    </div> -->
   </div>
 </div>
