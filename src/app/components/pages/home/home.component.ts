@@ -33,6 +33,17 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Get the friends of the current user.
+    this.userSvc.getFriends()
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+
+        }),
+      )
+      .subscribe();
+
+    // Get friend suggestions.
     const observablePattern = of(true).pipe(
       delay(2000),
       tap(() => {

@@ -20,4 +20,12 @@ export class UserService {
       true
     );
   }
+
+  getFriends(): Observable<any[]> {
+    return this.httpSvc.get<any[]>(`${environment.apiUrl}/user/get-friends`, true);
+  }
+
+  addFriend(friendId: string): Observable<any> {
+    return this.httpSvc.post<any>(`${environment.apiUrl}/user/add-friend/${friendId}`, {}, true);
+  }
 }
