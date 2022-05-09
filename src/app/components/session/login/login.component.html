@@ -1,5 +1,5 @@
-<div class="inicio">
-  <section class="galeria">
+<div class="inicio" *ngIf="{currentScreenSize: currentScreenSize$ | async} as currentScreenSize">
+  <section class="galeria" *ngIf="currentScreenSize.currentScreenSize !== 'XSmall'">
       <div class="slider">
           <ul>
               <li><img src="assets/images/login/login1.jpg" alt="modelo1"></li>
