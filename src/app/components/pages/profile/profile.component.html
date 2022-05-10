@@ -26,4 +26,7 @@
       <p>{{ publicacion?.description }}</p>
     </div>
   </div>
+  <div class="grid-container" *ngIf="!publicaciones">
+    <p>{{ errorMessage }}</p>
+  </div>
 </section>

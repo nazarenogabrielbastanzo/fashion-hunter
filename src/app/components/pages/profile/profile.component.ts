@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
+import { catchError, tap, of } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from '../../../interfaces/user.interface';
 import { PostService } from '../../../services/post.service';
@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   user!: User;
   publicaciones!: any[];
   private userId: string;
+  errorMessage!: string;
 
   constructor(
     private loginSvc: LoginService,
@@ -40,7 +41,17 @@ export class ProfileComponent implements OnInit {
         tap((res: any) => {
           // console.log(res.data.posts);
           this.publicaciones = res.data.posts;
-        })
+        }),
+        catchError((error: any) => {
+          if (error?.status === 404) {
+            // console.log('No se encontro ningún post');
+            this.errorMessage = 'No se encontro ningún post.';
+          } else {
+            // console.log('Error desconocido');
+            this.errorMessage = 'Error desconocido.';
+          }
+          return of(-1);
+        }),
       )
       .subscribe();
   }
