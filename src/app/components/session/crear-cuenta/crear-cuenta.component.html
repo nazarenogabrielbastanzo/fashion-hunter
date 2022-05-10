@@ -4,9 +4,9 @@
 <form class="container" (ngSubmit)="crearCuenta()" #newUserForm="ngForm">
   <div class="subtitle">
     <h2>Crear cuenta</h2>
-    <div>
+    <!-- <div>
       <img [src]="previsualizacion" alt="" (click)="fileUpload.click()" />
-    </div>
+    </div> -->
   </div>
   <div class="flex-container">
     <div class="flex-item">
@@ -140,6 +140,13 @@
           </button>
         </div>
       </div>
+    </div>
+    <div class="perfil-mobile">
+      <img [src]="previsualizacion" alt="" (click)="fileUpload.click()" />
+      <button (click)="fileUpload.click()">
+        <i class="fa-solid fa-arrow-up-from-bracket fa-lg"></i>
+        Subir archivo
+      </button>
     </div>
     <div class="flex-item go">
       <button

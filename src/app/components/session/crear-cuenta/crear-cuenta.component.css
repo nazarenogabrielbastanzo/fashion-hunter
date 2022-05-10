@@ -194,6 +194,9 @@ i.fa-solid {
 .input-error {
   color: red;
 }
+.perfil-mobile {
+  display: none;
+}
 
 /* iPads, Tabletas y dispositivos móviles */
 @media all and (max-width: 768px) {
@@ -212,7 +215,15 @@ i.fa-solid {
     margin-top: 44px;
     margin-bottom: 44px;
   }
-  .subtitle img {
+  .perfil-mobile {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: flex-start;
+  }
+  .perfil-mobile img {
     cursor: pointer;
     display: inline;
     width: 104px;
@@ -220,6 +231,15 @@ i.fa-solid {
     border-radius: 100%;
     border: 2px solid var(--primary-color);
     padding: 2px;
+  }
+  .perfil-mobile button {
+    width: 8rem;
+    height: 32.4px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    margin-top: 22.5px;
+    color: var(--primary-color);
+    cursor: pointer;
   }
   h1 {
     font-size: 36px;
