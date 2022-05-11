@@ -28,7 +28,7 @@ export class SuggestionComponent implements OnInit {
         .addFriend(friendId)
         .pipe(
           tap((res: any) => {
-            console.log(res);
+            // console.log(res);
           }),
           tap(() => {
             this.siguiendo = !this.siguiendo;

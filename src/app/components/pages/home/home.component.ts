@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.userSvc.getFriends()
       .pipe(
         tap((res: any) => {
-          console.log(res);
+          // console.log(res);
 
         }),
       )
