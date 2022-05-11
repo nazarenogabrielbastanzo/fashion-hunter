@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { PostService } from '../../../services/post.service';
 import { tap } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-guardadas',
@@ -10,20 +11,24 @@ import { tap } from 'rxjs';
   styleUrls: ['./guardadas.component.css'],
 })
 export class GuardadasComponent implements OnInit {
-  guardadas!: any[]
+  guardadas!: any[];
+  moment: any = moment;
 
   constructor(
     private router: Router,
     private _title: Title,
     private postsSvc: PostService
-  ) {}
+  ) {
+    moment.locale('es');
+  }
 
   ngOnInit(): void {
     this._title.setTitle('Fashion Hunter - Guardadas');
     this.postsSvc.getFavoritePosts().pipe(
       tap((res: any) => {
-        // console.log(res);
-        this.guardadas = res.data.favorites;
+        console.log(res);
+        const guardadas = res.data.favorites;
+        this.guardadas = guardadas.reverse();
       })
     ).subscribe()
   }

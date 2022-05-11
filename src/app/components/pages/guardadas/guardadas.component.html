@@ -4,17 +4,20 @@
 <div class="container">
   <!-- Back -->
   <div class="back" (click)="goHome()">
-    <img src="assets/images/icons/left_arrow.png" alt="" /><span>Guardadas</span>
+    <img src="assets/images/icons/left_arrow.png" alt="" /><span
+      >Guardadas</span
+    >
   </div>
 
   <!-- Guardadas -->
   <div class="saved-container" *ngIf="guardadas">
     <div class="saved-item" *ngFor="let guardada of guardadas">
-      <img
-        [src]="guardada?.image"
-        alt=""
-      />
-      <small>Hace 30 minutos</small>
+      <img [src]="guardada?.image" alt="" />
+      <small>{{
+        guardada?.created !== undefined
+          ? moment(guardada?.created).fromNow()
+          : moment("2022-04-11").fromNow()
+      }}</small>
     </div>
   </div>
 </div>
