@@ -5,8 +5,8 @@
   >
   <span
     class="follow"
-    (click)="siguiendo = !siguiendo"
-    [ngClass]="{ amigo: siguiendo == true }"
-    >{{ siguiendo == true ? "Amigo" : "Seguir" }}</span
+    (click)="toggleFriend(suggestion['_id'])"
+    [ngClass]="{ amigo: siguiendo === true }"
+    >{{ siguiendo === true ? "Amigo" : "Seguir" }}</span
   >
 </div>
