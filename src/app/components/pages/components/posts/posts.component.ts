@@ -11,15 +11,7 @@ export class PostsComponent implements OnInit {
   posts$!: Observable<any[]>;
 
   constructor(private postSvc: PostService) {
-    this.postSvc
-      .getPosts()
-      .pipe(
-        tap((res: any) => {
-          // console.log(res.data.resolvedPost);
-          this.posts$ = this.postSvc.posts$;
-        })
-      )
-      .subscribe();
+    this.posts$ = this.postSvc.posts$;
   }
 
   ngOnInit(): void {}
