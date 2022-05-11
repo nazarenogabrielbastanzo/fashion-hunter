@@ -1,36 +1,36 @@
-<div class="posts">
+<div class="posts" *ngIf="post">
   <div class="post">
     <img
-      [src]="post?.postedBy[0].profilePicDownloadUrl"
+      [src]="post.postedBy[0].profilePicDownloadUrl"
       class="img-rounded"
       alt=""
     />
     <p class="user">
-      <span class="name">{{ post?.postedBy[0].fullName }}</span>
+      <span class="name">{{ post.postedBy[0].fullName }}</span>
       <!-- -
       <small><span class="username">lina.gran</span></small
       > --><br />
-      <small>{{ post?.description }}</small>
+      <small>{{ post.description }}</small>
     </p>
     <div class="elapsed">
       <p>
-        <small>{{ moment(post?.created).fromNow() }}</small>
+        <small>{{ moment(post.created).fromNow() }}</small>
       </p>
     </div>
   </div>
-  <img [src]="post?.image" class="post-image" alt="" />
+  <img [src]="post.image" class="post-image" alt="" />
   <div class="actions">
     <img
       src="assets/images/icons/up_arrow.png"
       alt=""
       class="arrow-up"
-      (click)="like(post?._id, post?.numLikes)"
+      (click)="like(post._id, post.numLikes)"
     />
     <img
       src="assets/images/icons/down_arrow.png"
       alt=""
       class="arrow-down"
-      (click)="disLike(post?._id, post?.numLikes)"
+      (click)="disLike(post._id, post.numLikes)"
     />
     <img
       src="assets/images/icons/chat1.png"
@@ -49,16 +49,16 @@
       }}</span>
       <span
         class="favorite-counter"
-        *ngIf="!post?.numLikes && likes.numLikes == 0"
+        *ngIf="!post.numLikes && likes.numLikes == 0"
       >
         {{ 0 }}
       </span>
       <span
         class="favorite-counter"
-        *ngIf="post?.numLikes && !likes.numLikes"
-        >{{ post?.numLikes }}</span
+        *ngIf="post.numLikes && !likes.numLikes"
+        >{{ post.numLikes }}</span
       >
-      <img src="assets/images/icons/Favorite.png" alt="" (click)="addToFavorites(post?._id)" />
+      <img src="assets/images/icons/Favorite.png" alt="" (click)="addToFavorites(post._id)" />
     </div>
   </div>
 </div>

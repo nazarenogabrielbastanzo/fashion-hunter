@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalCommentsComponent } from '../modal-comments/modal-comments.component';
 import { PostService } from '../../../../services/post.service';
+import { Post } from '../../../../interfaces/post.interface';
 
 @Component({
   selector: 'app-post',
@@ -19,10 +20,10 @@ import { PostService } from '../../../../services/post.service';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostComponent implements OnInit {
-  @Input() post!: any;
-  moment: any = moment;
+  @Input() post!: Post;
+  moment = moment;
   likesSubject = new BehaviorSubject<number>(0);
-  numLikes: any;
+  numLikes!: number;
 
   constructor(
     private httpService: HttpConfigService,
@@ -35,8 +36,8 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {}
 
   like(postId: string, likes: number) {
-    this.httpService
-      .patch(`${environment.apiUrl}/posts/like/${postId}`, {}, true)
+    this.postSvc
+      .updateLikes(postId)
       .pipe(
         tap((resp: any) => {
           // console.log(resp);
@@ -75,10 +76,13 @@ export class PostComponent implements OnInit {
   }
 
   addToFavorites(postId: string): void {
-    this.postSvc.addFavoritePost(postId)
-    .pipe(
-      tap((res: any) => {/* console.log(res); */}),
-    )
-    .subscribe();
+    this.postSvc
+      .addFavoritePost(postId)
+      .pipe(
+        tap((res: any) => {
+          /* console.log(res); */
+        })
+      )
+      .subscribe();
   }
 }

@@ -21,11 +21,11 @@ export class UserService {
     );
   }
 
-  getFriends(): Observable<any[]> {
-    return this.httpSvc.get<any[]>(`${environment.apiUrl}/user/get-friends`, true);
+  getFriends(): Observable<User[]> {
+    return this.httpSvc.get<User[]>(`${environment.apiUrl}/user/get-friends`, true);
   }
 
-  addFriend(friendId: string): Observable<any> {
-    return this.httpSvc.post<any>(`${environment.apiUrl}/user/add-friend/${friendId}`, {}, true);
+  addFriend(friendId: string): Observable<User> {
+    return this.httpSvc.post<User>(`${environment.apiUrl}/user/add-friend/${friendId}`, {}, true);
   }
 }

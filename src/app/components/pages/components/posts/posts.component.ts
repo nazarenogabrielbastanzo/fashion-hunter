@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { PostService } from '../../../../services/post.service';
+import { Post } from '../../../../interfaces/post.interface';
 
 @Component({
   selector: 'app-posts',
@@ -8,7 +9,7 @@ import { PostService } from '../../../../services/post.service';
   styleUrls: ['./posts.component.css'],
 })
 export class PostsComponent implements OnInit {
-  posts$!: Observable<any[]>;
+  posts$!: Observable<Post[]>;
 
   constructor(private postSvc: PostService) {
     this.posts$ = this.postSvc.posts$;

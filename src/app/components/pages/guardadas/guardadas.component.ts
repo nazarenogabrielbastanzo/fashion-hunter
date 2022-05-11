@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { PostService } from '../../../services/post.service';
 import { tap } from 'rxjs';
 import * as moment from 'moment';
+import { Post } from '../../../interfaces/post.interface';
 
 @Component({
   selector: 'app-guardadas',
@@ -11,8 +12,8 @@ import * as moment from 'moment';
   styleUrls: ['./guardadas.component.css'],
 })
 export class GuardadasComponent implements OnInit {
-  guardadas!: any[];
-  moment: any = moment;
+  guardadas!: Post[];
+  moment = moment;
 
   constructor(
     private router: Router,

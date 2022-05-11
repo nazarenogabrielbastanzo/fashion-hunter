@@ -4,6 +4,10 @@ export interface Post {
   image: string;
   numComments: number;
   numLikes: number;
-  postedBy: any[];
+  postedBy: {
+    fullName: string;
+    profilePicDownloadUrl: string;
+    userId: string;
+  }[];
   _id: string;
 }

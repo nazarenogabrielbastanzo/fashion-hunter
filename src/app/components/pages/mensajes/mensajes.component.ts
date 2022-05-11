@@ -19,9 +19,9 @@ export class MensajesComponent implements OnInit {
   viewEmojis: boolean;
   message: string;
   user!: User;
-  outcomingMessages: any[] = [];
+  outcomingMessages: { message: string; userImg: string; }[] = [];
   userImg!: string;
-  private userId;
+  private userId: string;
 
   constructor(
     private router: Router,
@@ -71,12 +71,10 @@ export class MensajesComponent implements OnInit {
   }
 
   sendMessage(message: string) {
-
     this.httpService
       .get<User>(`${environment.apiUrl}/user/${this.userId}`, true)
       .subscribe({
         next: (resp: any) => {
-
           this.userImg = resp.data.user[0].img;
           const theMessage = {
             message,
