@@ -15,7 +15,7 @@ export class PostService {
     this.getPosts()
       .pipe(
         tap((res: any) => {
-          console.log(res.data.resolvedPost);
+          // console.log(res.data.resolvedPost);
           this.postsSource.next(res.data.resolvedPost);
         })
       )
