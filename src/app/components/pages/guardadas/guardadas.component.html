@@ -10,7 +10,7 @@
   </div>
 
   <!-- Guardadas -->
-  <div class="saved-container" *ngIf="guardadas">
+  <div class="saved-container" *ngIf="guardadas.length">
     <div class="saved-item" *ngFor="let guardada of guardadas">
       <img [src]="guardada?.image" alt="" />
       <small>{{
@@ -19,5 +19,8 @@
           : moment("2022-04-11").fromNow()
       }}</small>
     </div>
+  </div>
+  <div class="saved-container" *ngIf="!guardadas.length">
+    <p>No se encontró ninguna publicación guardada.</p>
   </div>
 </div>
