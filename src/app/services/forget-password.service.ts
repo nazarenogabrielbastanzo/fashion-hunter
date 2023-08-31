@@ -16,7 +16,8 @@ export class ForgetPasswordService {
     const theEmail = { email };
     return this.httpService.post(
       `${environment.apiUrl}/user/forgotPassword`,
-      theEmail
+      theEmail,
+      true
     );
   }
 

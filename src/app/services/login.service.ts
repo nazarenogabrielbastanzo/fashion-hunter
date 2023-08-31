@@ -19,7 +19,7 @@ export class LoginService {
 
   // Login
   login(user: UserLogin): Observable<UserLogin> {
-    return this.httpService.post<UserLogin>(environment.apiUrl + '/user/login', user);
+    return this.httpService.post<UserLogin>(environment.apiUrl + '/user/login', user, true);
   }
 
   logOut() {

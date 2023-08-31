@@ -91,7 +91,7 @@ export class CrearCuentaComponent implements OnInit {
     userData.append("userImg", this.userImg);
 
     this.httpService
-      .post(`${environment.apiUrl}/user/signup`, userData)
+      .post(`${environment.apiUrl}/user/signup`, userData, true)
       .subscribe({
         next: (resp) => { },
         error: (error) => { },
