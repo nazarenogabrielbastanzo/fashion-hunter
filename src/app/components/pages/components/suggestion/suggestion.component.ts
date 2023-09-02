@@ -1,11 +1,12 @@
 import { UserService } from '../../../../services/user.service';
-import { tap } from 'rxjs';
+import { map, mergeMap, of, tap, zip } from 'rxjs';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { Friend } from 'src/app/interfaces/friend.interface';
 
 @Component({
   selector: 'app-suggestion',
@@ -40,12 +41,31 @@ export class SuggestionComponent implements OnInit {
           tap((res: any) => {
 
             console.log(res);
+
+            // TODO: despues de un tiempo que desaparezca el amigo agregado
           })
         )
         .subscribe();
     } else {
 
-      
+      this.userSvc.getUserById(userId)
+        .pipe(
+          mergeMap((resp: any) => zip(of(resp), this.userSvc.getFriends())),
+          map((resp: any) => {
+            console.log(resp);
+
+            const friendToRemove = resp[1].data.friends.filter((friend: Friend) => friend.username === resp[0].data.user[0].username);
+            console.log(friendToRemove);
+
+            this.userSvc.deleteFriend(friendToRemove[0]._id)
+              .pipe(
+                tap((resp: any) => {
+                  console.log(resp);
+
+                })
+              ).subscribe()
+          })
+        ).subscribe();
 
       // The friend should be removed
       // this.userSvc.deleteFriend(friendId)

@@ -34,6 +34,6 @@ export class UserService {
   }
 
   deleteFriend(friendId: string): Observable<User> {
-    return this.httpSvc.post<User>(`${environment.apiUrl}/user/delete-friend/${friendId}`, {}, true);
+    return this.httpSvc.delete<User>(`${environment.apiUrl}/user/delete-friend/${friendId}`, true);
   }
 }
