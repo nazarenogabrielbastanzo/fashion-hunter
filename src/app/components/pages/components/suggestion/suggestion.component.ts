@@ -24,7 +24,7 @@ export class SuggestionComponent implements OnInit {
 
     console.log(this.suggestion);
 
-
+    // TODO: Aquí deberia ver si el amigo que sugiere esta en mi lista de amigos y cambiar la bandera 'siguiendo'
 
   }
 

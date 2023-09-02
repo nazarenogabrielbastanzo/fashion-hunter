@@ -24,7 +24,9 @@ export class HomeComponent implements OnInit {
 
   // Los amigos que tiene el usuario actual
   friends: Friend[] = [];
-  friendSuggestions: Friend[] = [];
+
+  // Sugerencias de amistad son usuarios, aun no son amigos
+  friendSuggestions: User[] = [];
 
   // TODO: replace with friendSuggestions array
   suggestions = [];
@@ -90,36 +92,38 @@ export class HomeComponent implements OnInit {
 
           console.log(res);
 
-          // this.allUsers = res.data.users;
+          this.allUsers = res.data.users;
 
           console.log(this.allUsers);
 
-          // this.otherUsers = this.allUsers.filter(user => user._id !== this.userId);
+          this.otherUsers = this.allUsers.filter(user => user._id !== this.userId);
 
           console.log(this.otherUsers);
 
+          this.friendSuggestions = this.otherUsers;
+
         }),
-        mergeMap((resp: any) =>
-          zip(of(resp), this.userSvc.getFriends())
-        ),
-        map((resp: any) => {
-          console.log(resp);
+        // mergeMap((resp: any) =>
+        //   zip(of(resp), this.userSvc.getFriends())
+        // ),
+        // map((resp: any) => {
+        //   console.log(resp);
 
-          const otherUsers = resp[0].data.users.filter((user: any) => user._id !== this.userId);
+        //   const otherUsers = resp[0].data.users.filter((user: any) => user._id !== this.userId);
 
-          console.log(otherUsers);
+        //   console.log(otherUsers);
 
-          const friends = resp[1].data.friends;
+        //   const friends = resp[1].data.friends;
 
-          console.log(friends);
+        //   console.log(friends);
 
-          this.friendSuggestions = otherUsers.filter((user: User) => {
-            return !friends.find((friend: Friend) => friend.username === user.username);
-          });
+        //   this.friendSuggestions = otherUsers.filter((user: User) => {
+        //     return !friends.find((friend: Friend) => friend.username === user.username);
+        //   });
 
-          console.log(this.friendSuggestions);
+        //   console.log(this.friendSuggestions);
 
-        })
+        // })
       ).subscribe();
 
     // this.userSvc
