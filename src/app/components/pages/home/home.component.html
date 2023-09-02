@@ -21,12 +21,9 @@
 </div>
 
 <!-- Suggestions -->
-<div class="suggestions" *ngIf="suggestions.length">
+<div class="suggestions" *ngIf="friendSuggestions.length">
   <p class="suggestions-title">Sugerencias para ti</p>
-  <app-suggestion
-    *ngFor="let suggestion of suggestions"
-    [suggestion]="suggestion"
-  ></app-suggestion>
+  <app-suggestion *ngFor="let friendSuggestion of friendSuggestions" [suggestion]="friendSuggestion"></app-suggestion>
 </div>
 
 <!-- Crear nuevo... -->

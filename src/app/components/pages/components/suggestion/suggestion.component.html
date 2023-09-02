@@ -1,12 +1,9 @@
 <div class="suggestion">
-  <img [src]="suggestion['img']" alt="" />
-  <span class="suggestion-name"
-    >{{ suggestion["firstName"] }}&nbsp;{{ suggestion["lastName"] }}</span
-  >
-  <span
-    class="follow"
-    (click)="toggleFriend(suggestion['_id'])"
-    [ngClass]="{ amigo: siguiendo === true }"
-    >{{ siguiendo === true ? "Amigo" : "Seguir" }}</span
-  >
+  <img [src]="suggestion['img']" [alt]="suggestion['username']" />
+  <span class="suggestion-name">
+    {{ suggestion["firstName"] }}&nbsp;{{ suggestion["lastName"] }}
+  </span>
+  <span class="follow" (click)="toggleFriend(suggestion['_id'])" [ngClass]="{ amigo: siguiendo === true }">
+    {{ siguiendo === true ? "Amigo" : "Seguir" }}
+  </span>
 </div>

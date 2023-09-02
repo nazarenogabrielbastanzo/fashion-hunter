@@ -7,6 +7,7 @@ import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
 import { User } from '../../../interfaces/user.interface';
 import { UserService } from '../../../services/user.service';
+import { Friend } from 'src/app/interfaces/friend.interface';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,20 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+
+  currentUser!: User;
+  allUsers: User[] = [];
+
+  // Todos los usuarios menos el actual
+  otherUsers: User[] = [];
+
+  // Los amigos que tiene el usuario actual
+  friends: Friend[] = [];
+  friendSuggestions: Friend[] = [];
+
+  // TODO: replace with friendSuggestions array
   suggestions = [];
+
   oculto = true;
   numLikes!: number;
   notificationsHidden = true;
@@ -25,7 +39,7 @@ export class HomeComponent implements OnInit {
     private loginSvc: LoginService,
     private dialog: MatDialog,
     private router: Router,
-    private userSvc: UserService
+    private userSvc: UserService,
   ) {
     this.userId = this.loginSvc.getUserId();
 
@@ -47,7 +61,7 @@ export class HomeComponent implements OnInit {
     const observablePattern = of(true).pipe(
       delay(2000),
       tap(() => {
-        if (this.suggestions.length === 0) {
+        if (this.friendSuggestions.length === 0) {
           this.loadSuggestions();
         }
       })
@@ -57,28 +71,82 @@ export class HomeComponent implements OnInit {
   }
 
   loadSuggestions(): void {
-    this.userSvc
-      .getAllUsers()
+
+    this.userSvc.getFriends()
       .pipe(
-        mergeMap((res: any) =>
-          zip(of(res), this.userSvc.getUserById(this.userId))
+        tap((res: any) => {
+          console.log(res);
+
+          // this.friends = res.data.friends;
+
+          console.log(this.friends);
+
+        }),
+      ).subscribe();
+
+    this.userSvc.getAllUsers()
+      .pipe(
+        tap((res: any) => {
+
+          console.log(res);
+
+          // this.allUsers = res.data.users;
+
+          console.log(this.allUsers);
+
+          // this.otherUsers = this.allUsers.filter(user => user._id !== this.userId);
+
+          console.log(this.otherUsers);
+
+        }),
+        mergeMap((resp: any) =>
+          zip(of(resp), this.userSvc.getFriends())
         ),
-        map((res: any) => {
-          // console.log(res);
-          const allUsers = res[0].data.users;
-          const resultSuggestion = allUsers.filter(
-            (user: User) => user.username !== res[1].data.user[0].username
-          );
-          if (resultSuggestion.length > 5) {
-            this.suggestions = resultSuggestion.slice(
-              resultSuggestion.length - 5
-            );
-          } else {
-            this.suggestions = resultSuggestion;
-          }
+        map((resp: any) => {
+          console.log(resp);
+
+          const otherUsers = resp[0].data.users.filter((user: any) => user._id !== this.userId);
+
+          console.log(otherUsers);
+
+          const friends = resp[1].data.friends;
+
+          console.log(friends);
+
+          this.friendSuggestions = otherUsers.filter((user: User) => {
+            return !friends.find((friend: Friend) => friend.username === user.username);
+          });
+
+          console.log(this.friendSuggestions);
+
         })
-      )
-      .subscribe();
+      ).subscribe();
+
+    // this.userSvc
+    //   .getAllUsers()
+    //   .pipe(
+    //     mergeMap((res: any) =>
+    //       zip(of(res), this.userSvc.getUserById(this.userId))
+    //     ),
+    //     map((res: any) => {
+
+    //       console.log(res);
+
+    //       const allUsers = res[0].data.users;
+    //       const resultSuggestion = allUsers.filter(
+    //         (user: User) => user.username !== res[1].data.user[0].username
+    //       );
+    //       if (resultSuggestion.length > 5) {
+    //         this.suggestions = resultSuggestion.slice(resultSuggestion.length - 5);
+    //       } else {
+    //         this.suggestions = resultSuggestion;
+    //       }
+
+    //       console.log(this.suggestions);
+
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   crearPublicacion() {
@@ -91,7 +159,7 @@ export class HomeComponent implements OnInit {
             data: { user: res.data.user[0] },
           });
 
-          dialogRef.afterClosed().subscribe((result) => {});
+          dialogRef.afterClosed().subscribe((result) => { });
         })
       )
       .subscribe();

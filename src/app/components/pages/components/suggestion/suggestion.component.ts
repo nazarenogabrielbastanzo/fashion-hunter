@@ -17,28 +17,47 @@ export class SuggestionComponent implements OnInit {
   @Input() suggestion: any;
   siguiendo = false;
 
-  constructor(private userSvc: UserService) {}
+  constructor(private userSvc: UserService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
 
-  toggleFriend(friendId: string): void {
-    if (!this.siguiendo) {
-      // The friend is added.
-      this.userSvc
-        .addFriend(friendId)
+    console.log(this.suggestion);
+
+
+
+  }
+
+  toggleFriend(userId: string): void {
+
+    // toggle
+    this.siguiendo = !this.siguiendo;
+
+    if (this.siguiendo === true) {
+
+      // Add as friend
+      this.userSvc.addFriend(userId)
         .pipe(
           tap((res: any) => {
-            // console.log(res);
-          }),
-          tap(() => {
-            this.siguiendo = !this.siguiendo;
+
+            console.log(res);
           })
         )
         .subscribe();
     } else {
-      // The friend should be removed.
-      this.siguiendo = !this.siguiendo;
-      return;
+
+      
+
+      // The friend should be removed
+      // this.userSvc.deleteFriend(friendId)
+      //   .pipe(
+      //     tap((res: any) => {
+
+      //       console.log(res);
+      //     })
+      //   ).subscribe();
+
+      // this.siguiendo = !this.siguiendo;
+      // return;
     }
   }
 }
