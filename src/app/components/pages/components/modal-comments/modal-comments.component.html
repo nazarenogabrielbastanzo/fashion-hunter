@@ -1,22 +1,28 @@
+<!-- Contenedor -->
 <div class="container">
+
+  <!-- El post -->
   <div class="post">
     <div class="post-info">
-      <img src="assets/images/avatar/lina.png" alt="" />
+      <img [src]="dataInjected.profileImg" [alt]="dataInjected.fullName" class="profileImg" />
       <div class="post-user-info">
-        <span class="full-name">Lina Grante</span>
-        <span class="username">lina.gran</span>
+        <span class="full-name">{{dataInjected.fullName}}</span>
       </div>
     </div>
     <img
-      src="assets/images/feed-inicio/nati-melnychuk-oO0JAOJhquk-unsplash.jpg"
-      alt=""
+      [src]="dataInjected.postImg"
+      alt="El post"
       class="post-img"
     />
     <span class="post-description">
-      Dónde puedo encontrar este modelo de pulsera?
+      {{dataInjected.postDesc}}
     </span>
   </div>
+  <!-- Fin del post -->
+  
+  <!-- Los comentarios -->
   <div class="comments">
+
     <!-- Comment -->
     <div class="wrapper">
       <div class="comment">
@@ -87,5 +93,9 @@
     <!-- end comment -->
 
     <div class="final-line"></div>
+
   </div>
+  <!-- Fin de los comentarios -->
+
 </div>
+<!-- Fin del contenedor -->

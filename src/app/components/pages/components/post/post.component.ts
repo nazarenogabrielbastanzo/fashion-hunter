@@ -4,7 +4,7 @@ import {
   Input,
 } from '@angular/core';
 import * as moment from 'moment';
-import { Observable, tap, BehaviorSubject } from 'rxjs';
+import { tap, BehaviorSubject } from 'rxjs';
 import { HttpConfigService } from 'src/app/services/http-config.service';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,7 +20,7 @@ import { Dialog3Component } from 'src/app/modules/shared/dialog3/dialog3.compone
 })
 export class PostComponent implements OnInit {
   @Input() post!: Post;
-  
+
   moment = moment;
 
   likes = new BehaviorSubject<number>(0);
@@ -52,7 +52,9 @@ export class PostComponent implements OnInit {
         })
       ).subscribe();
 
-      this.likes.next(this.post.numLikes);
+    this.likes.next(this.post.numLikes);
+
+    console.log(this.post);
   }
 
   like(postId: string, likes: number) {
@@ -100,9 +102,15 @@ export class PostComponent implements OnInit {
   newComment() {
     const dialogRef = this.dialog.open(ModalCommentsComponent, {
       disableClose: false,
+      data: {
+        profileImg: this.post.postedBy[0].profilePicDownloadUrl,
+        fullName: this.post.postedBy[0].fullName,
+        postImg: this.post.image,
+        postDesc: this.post.description
+      }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => { });
   }
 
   addToFavorites(postId: string): void {
