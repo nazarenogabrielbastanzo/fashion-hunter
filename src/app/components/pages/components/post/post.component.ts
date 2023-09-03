@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   Input,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import * as moment from 'moment';
 import { Observable, tap, BehaviorSubject } from 'rxjs';
@@ -17,13 +16,17 @@ import { Post } from '../../../../interfaces/post.interface';
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostComponent implements OnInit {
   @Input() post!: Post;
   moment = moment;
   likesSubject = new BehaviorSubject<number>(0);
   numLikes!: number;
+
+  postSaved = new BehaviorSubject<boolean>(false);
+  postSaved$ = this.postSaved.asObservable();
+
+  favorites: any;
 
   constructor(
     private httpService: HttpConfigService,
@@ -33,7 +36,22 @@ export class PostComponent implements OnInit {
     moment.locale('es');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.postSvc.getFavoritePosts()
+      .pipe(
+        tap((resp: any) => {
+          console.log(resp);
+
+          this.favorites = resp.data.favorites;
+
+          const favorite = this.favorites.filter((fav: any) => fav.image === this.post.image);
+
+          this.postSaved.next(favorite.length ? true : false);
+
+          console.log(favorite)
+        })
+      ).subscribe();
+  }
 
   like(postId: string, likes: number) {
     this.postSvc
@@ -80,6 +98,10 @@ export class PostComponent implements OnInit {
         tap((res: any) => {
         })
       )
-      .subscribe();
+      .subscribe({
+        complete: () => {
+          this.postSaved.next(true);
+        }
+      });
   }
 }
