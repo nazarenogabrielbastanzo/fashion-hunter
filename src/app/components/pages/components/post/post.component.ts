@@ -40,15 +40,12 @@ export class PostComponent implements OnInit {
     this.postSvc.getFavoritePosts()
       .pipe(
         tap((resp: any) => {
-          console.log(resp);
 
           this.favorites = resp.data.favorites;
 
           const favorite = this.favorites.filter((fav: any) => fav.image === this.post.image);
 
           this.postSaved.next(favorite.length ? true : false);
-
-          console.log(favorite)
         })
       ).subscribe();
   }

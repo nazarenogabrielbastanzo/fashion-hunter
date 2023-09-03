@@ -30,9 +30,10 @@
         {{ 0 }}
       </span>
       <span class="favorite-counter" *ngIf="post.numLikes && !likes.numLikes">{{ post.numLikes }}</span>
-      <!-- <img src="assets/images/icons/Favorite.png" alt="" /> -->
-      <img *ngIf="(postSaved | async)" class="solid-star" src="assets/images/icons/star-solid.svg" width="32" height="32" alt="">
-      <img *ngIf="!(postSaved | async)" class="regular-star" src="assets/images/icons/star-regular.svg" width="32" height="32" alt=""  (click)="addToFavorites(post._id)" />
+      <img *ngIf="(postSaved | async)" class="solid-star" src="assets/images/icons/star-solid.svg" width="32"
+        height="32" alt="">
+      <img *ngIf="!(postSaved | async)" class="regular-star" src="assets/images/icons/star-regular.svg" width="32"
+        height="32" alt="" (click)="addToFavorites(post._id)" />
     </div>
   </div>
 </div>

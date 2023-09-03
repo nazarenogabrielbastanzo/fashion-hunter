@@ -26,10 +26,7 @@ export class GuardadasComponent implements OnInit {
   ngOnInit(): void {
     this._title.setTitle('Fashion Hunter - Guardadas');
     this.postsSvc.getFavoritePosts().pipe(
-      tap((res: any) => {
-
-        console.log(res);
-        
+      tap((res: any) => {        
         const guardadas = res.data.favorites;
         this.guardadas = guardadas.reverse();
       })
