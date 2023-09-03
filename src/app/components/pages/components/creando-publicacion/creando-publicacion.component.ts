@@ -37,11 +37,13 @@ export class CreandoPublicacionComponent implements OnInit {
         tap(() => {
           this.message = 'Listo!';
         }),
-        delay(1000),
         mergeMap((res: any) => zip(of(res), this.postSvc.getPosts())),
         map((res: any) => {
           this.postSvc.postsSource.next(res[1].data.resolvedPost);
-        })
+        }),
+        tap(() => {
+          this.goHome();
+        }),
       )
       .subscribe();
   }

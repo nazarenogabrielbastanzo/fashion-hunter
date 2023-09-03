@@ -6,7 +6,8 @@
   justify-content: center;
   align-items: flex-start;
   height: 100%;
-  min-width: 1024px;
+  min-width: 1030px;
+  position: relative;
 }
 
 .profileImg {
@@ -22,6 +23,9 @@
   justify-content: flex-start;
   align-items: flex-start;
   /* margin: 20px; */
+  overflow-y: auto;
+  max-height: calc(100vh - 30px);
+  margin-right: 10px;
 }
 .comments {
   width: 50%;
@@ -33,6 +37,8 @@
   align-items: flex-start;
   /* margin: 20px; */
   overflow-y: auto;
+  position: relative;
+  top: 45px;
 }
 .post-img {
   width: 30rem;
@@ -102,6 +108,8 @@
 }
 .post-description {
   margin: 10px 0px;
+  text-align: justify;
+  width: 30rem;
 }
 .comments {
   border: 2px solid var(--other-color-3);
@@ -151,4 +159,14 @@
   width: 20%;
   height: 7rem;
   margin: 1rem auto;
+}
+
+.close-btn {
+  position: absolute;
+  top:0;
+  right: 0;
+  background-color: var(--secondary-color);
+  font-size: x-large;
+  color: white;
+  width: fit-content;
 }

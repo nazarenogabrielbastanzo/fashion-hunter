@@ -24,6 +24,7 @@
       <span class="favorite-counter" *ngIf="likes | async">{{
         likes | async
         }}</span>
+      <span class="favorite-counter" *ngIf="!(likes | async)">0</span>
       <img *ngIf="(postSaved | async)" class="solid-star" src="assets/images/icons/star-solid.svg" width="32"
         height="32" alt="">
       <img *ngIf="!(postSaved | async)" class="regular-star" src="assets/images/icons/star-regular.svg" width="32"
