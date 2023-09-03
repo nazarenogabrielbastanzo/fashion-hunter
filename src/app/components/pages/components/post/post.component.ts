@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalCommentsComponent } from '../modal-comments/modal-comments.component';
 import { PostService } from '../../../../services/post.service';
 import { Post } from '../../../../interfaces/post.interface';
+import { Dialog3Component } from 'src/app/modules/shared/dialog3/dialog3.component';
 
 @Component({
   selector: 'app-post',
@@ -19,9 +20,11 @@ import { Post } from '../../../../interfaces/post.interface';
 })
 export class PostComponent implements OnInit {
   @Input() post!: Post;
+  
   moment = moment;
-  likesSubject = new BehaviorSubject<number>(0);
-  numLikes!: number;
+
+  likes = new BehaviorSubject<number>(0);
+  likes$ = this.likes.asObservable();
 
   postSaved = new BehaviorSubject<boolean>(false);
   postSaved$ = this.postSaved.asObservable();
@@ -48,6 +51,8 @@ export class PostComponent implements OnInit {
           this.postSaved.next(favorite.length ? true : false);
         })
       ).subscribe();
+
+      this.likes.next(this.post.numLikes);
   }
 
   like(postId: string, likes: number) {
@@ -57,14 +62,20 @@ export class PostComponent implements OnInit {
         tap((resp: any) => {
           const newLike =
             resp.data.post.numLikes > likes ? resp.data.post.numLikes : likes;
-          this.likesSubject.next(newLike);
+          this.likes.next(newLike);
         })
       )
-      .subscribe();
-  }
+      .subscribe({
+        error: (err: any) => {
+          console.log(err.error.message);
 
-  get likesAction$(): Observable<number> {
-    return this.likesSubject.asObservable();
+          this.dialog.open(Dialog3Component, {
+            data: {
+              message: err.error.message
+            }
+          });
+        }
+      });
   }
 
   disLike(postId: string, likes: number) {
@@ -74,10 +85,20 @@ export class PostComponent implements OnInit {
         tap((resp: any) => {
           const newLike =
             resp.data.post.numLikes < likes ? resp.data.post.numLikes : likes;
-          this.likesSubject.next(newLike);
+          this.likes.next(newLike);
         })
       )
-      .subscribe();
+      .subscribe({
+        error: (err: any) => {
+          console.log(err.error.message);
+
+          this.dialog.open(Dialog3Component, {
+            data: {
+              message: err.error.message
+            }
+          });
+        }
+      });
   }
 
   newComment() {

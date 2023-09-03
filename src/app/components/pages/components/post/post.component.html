@@ -20,16 +20,10 @@
     <img src="assets/images/icons/down_arrow.png" alt="" class="arrow-down"
       (click)="disLike(post._id, post.numLikes)" />
     <img src="assets/images/icons/chat1.png" alt="" class="chat-icon" (click)="newComment()" />
-    <div class="favorites" *ngIf="{
-        numLikes: likesAction$ | async
-      } as likes">
-      <span class="favorite-counter" *ngIf="likes.numLikes">{{
-        likes.numLikes
+    <div class="favorites">
+      <span class="favorite-counter" *ngIf="likes | async">{{
+        likes | async
         }}</span>
-      <span class="favorite-counter" *ngIf="!post.numLikes && likes.numLikes == 0">
-        {{ 0 }}
-      </span>
-      <span class="favorite-counter" *ngIf="post.numLikes && !likes.numLikes">{{ post.numLikes }}</span>
       <img *ngIf="(postSaved | async)" class="solid-star" src="assets/images/icons/star-solid.svg" width="32"
         height="32" alt="">
       <img *ngIf="!(postSaved | async)" class="regular-star" src="assets/images/icons/star-regular.svg" width="32"
