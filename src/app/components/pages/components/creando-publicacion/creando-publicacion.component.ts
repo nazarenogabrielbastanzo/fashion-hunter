@@ -40,7 +40,6 @@ export class CreandoPublicacionComponent implements OnInit {
         delay(1000),
         mergeMap((res: any) => zip(of(res), this.postSvc.getPosts())),
         map((res: any) => {
-          // console.log(res);
           this.postSvc.postsSource.next(res[1].data.resolvedPost);
         })
       )

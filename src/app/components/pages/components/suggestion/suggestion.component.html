@@ -3,7 +3,7 @@
   <span class="suggestion-name">
     {{ suggestion["firstName"] }}&nbsp;{{ suggestion["lastName"] }}
   </span>
-  <span class="follow" (click)="toggleFriend(suggestion['_id'])" [ngClass]="{ amigo: siguiendo === true }">
-    {{ siguiendo === true ? "Amigo" : "Seguir" }}
+  <span class="follow" (click)="toggleFriend(suggestion['_id'])" [ngClass]="{ amigo: (following | async) === true }">
+    {{ (following | async) === true ? "Amigo" : "Seguir" }}
   </span>
 </div>

@@ -120,13 +120,14 @@
 .suggestions {
   position: fixed;
   width: fit-content;
-  height: fit-content;
+  max-height: calc(100% - 250px);
   left: 49rem;
   top: 14.5rem;
   font-weight: bold;
   border: 2px solid #afa9a9;
   box-sizing: border-box;
   border-radius: 10px;
+  overflow: auto;
 }
 .suggestions-title {
   margin-left: 0.6rem;

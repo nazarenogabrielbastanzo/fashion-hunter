@@ -40,7 +40,6 @@ export class PostComponent implements OnInit {
       .updateLikes(postId)
       .pipe(
         tap((resp: any) => {
-          // console.log(resp);
           const newLike =
             resp.data.post.numLikes > likes ? resp.data.post.numLikes : likes;
           this.likesSubject.next(newLike);
@@ -58,7 +57,6 @@ export class PostComponent implements OnInit {
       .delete(`${environment.apiUrl}/posts/like/${postId}`, true)
       .pipe(
         tap((resp: any) => {
-          // console.log(resp);
           const newLike =
             resp.data.post.numLikes < likes ? resp.data.post.numLikes : likes;
           this.likesSubject.next(newLike);
@@ -80,7 +78,6 @@ export class PostComponent implements OnInit {
       .addFavoritePost(postId)
       .pipe(
         tap((res: any) => {
-          /* console.log(res); */
         })
       )
       .subscribe();

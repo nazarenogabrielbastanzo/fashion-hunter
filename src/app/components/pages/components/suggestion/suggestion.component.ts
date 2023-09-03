@@ -1,5 +1,5 @@
 import { UserService } from '../../../../services/user.service';
-import { map, mergeMap, of, tap, zip } from 'rxjs';
+import { BehaviorSubject, map, mergeMap, of, tap, zip } from 'rxjs';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,68 +16,86 @@ import { Friend } from 'src/app/interfaces/friend.interface';
 })
 export class SuggestionComponent implements OnInit {
   @Input() suggestion: any;
-  siguiendo = false;
 
-  constructor(private userSvc: UserService) { }
+  following = new BehaviorSubject<boolean>(false);
+  following$ = this.following.asObservable();
+
+  constructor(
+    private userSvc: UserService
+  ) { }
 
   ngOnInit(): void {
 
-    console.log(this.suggestion);
-
     // TODO: Aquí deberia ver si el amigo que sugiere esta en mi lista de amigos y cambiar la bandera 'siguiendo'
 
+    this.loadFollowingState();
+
   }
 
-  toggleFriend(userId: string): void {
+  loadFollowingState() {
+    this.userSvc.getFriends()
+      .pipe(
+        tap((resp: any) => {
 
-    // toggle
-    this.siguiendo = !this.siguiendo;
+          // friends
+          const friends = resp.data.friends;
 
-    if (this.siguiendo === true) {
+          const friendsAlsoSugessted = friends.filter((thatFriend: any) => thatFriend.username === this.suggestion.username);
+
+          if (friendsAlsoSugessted.length) {
+            this.following.next(true);
+          }
+        })
+      ).subscribe();
+  }
+
+  addSuggestionAsFriend(suggestionId: string) {
+
+
+    this.userSvc.addFriend(suggestionId)
+      .pipe(
+        tap((res: any) => {
+        })
+      )
+      .subscribe();
+  }
+
+  removeSuggestionAsFriend(suggestionId: string) {
+
+
+    this.userSvc.getUserById(suggestionId)
+      .pipe(
+        mergeMap((resp: any) => zip(of(resp), this.userSvc.getFriends())),
+        map((resp: any) => {
+
+          const friendToRemove = resp[1].data.friends.filter((friend: Friend) => friend.username === resp[0].data.user[0].username);
+
+          this.userSvc.deleteFriend(friendToRemove[0]._id)
+            .pipe(
+              tap((resp: any) => {
+              })
+            ).subscribe()
+        })
+      ).subscribe();
+  }
+
+  toggleFriend(suggestionId: string): void {
+
+    if (this.following.value === false) {
 
       // Add as friend
-      this.userSvc.addFriend(userId)
-        .pipe(
-          tap((res: any) => {
+      this.addSuggestionAsFriend(suggestionId);
 
-            console.log(res);
-
-            // TODO: despues de un tiempo que desaparezca el amigo agregado
-          })
-        )
-        .subscribe();
     } else {
 
-      this.userSvc.getUserById(userId)
-        .pipe(
-          mergeMap((resp: any) => zip(of(resp), this.userSvc.getFriends())),
-          map((resp: any) => {
-            console.log(resp);
+      // Remove as friend
+      this.removeSuggestionAsFriend(suggestionId);
 
-            const friendToRemove = resp[1].data.friends.filter((friend: Friend) => friend.username === resp[0].data.user[0].username);
-            console.log(friendToRemove);
-
-            this.userSvc.deleteFriend(friendToRemove[0]._id)
-              .pipe(
-                tap((resp: any) => {
-                  console.log(resp);
-
-                })
-              ).subscribe()
-          })
-        ).subscribe();
-
-      // The friend should be removed
-      // this.userSvc.deleteFriend(friendId)
-      //   .pipe(
-      //     tap((res: any) => {
-
-      //       console.log(res);
-      //     })
-      //   ).subscribe();
-
-      // this.siguiendo = !this.siguiendo;
-      // return;
     }
+
+    // toggle
+    this.following.next(!this.following.value);
+
   }
 }
+

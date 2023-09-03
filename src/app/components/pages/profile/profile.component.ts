@@ -39,15 +39,12 @@ export class ProfileComponent implements OnInit {
       .getPostByUser(this.userId)
       .pipe(
         tap((res: any) => {
-          // console.log(res.data.posts);
           this.publicaciones = res.data.posts;
         }),
         catchError((error: any) => {
           if (error?.status === 404) {
-            // console.log('No se encontro ningún post');
             this.errorMessage = 'No se encontro ningún post.';
           } else {
-            // console.log('Error desconocido');
             this.errorMessage = 'Error desconocido.';
           }
           return of(-1);
