@@ -24,6 +24,7 @@ import { PostComponent } from './components/post/post.component';
 import { ModalCommentsComponent } from './components/modal-comments/modal-comments.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { DateToArrayPipe } from 'src/app/pipes/date-to-array.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PostsComponent } from './components/posts/posts.component';
     PostComponent,
     ModalCommentsComponent,
     SuggestionComponent,
-    PostsComponent
+    PostsComponent,
+    DateToArrayPipe,
   ],
   imports: [
     CommonModule,
