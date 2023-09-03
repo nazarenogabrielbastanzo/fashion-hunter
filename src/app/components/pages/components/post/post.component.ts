@@ -67,8 +67,6 @@ export class PostComponent implements OnInit {
       )
       .subscribe({
         error: (err: any) => {
-          console.log(err.error.message);
-
           this.dialog.open(Dialog3Component, {
             data: {
               message: err.error.message
@@ -90,8 +88,6 @@ export class PostComponent implements OnInit {
       )
       .subscribe({
         error: (err: any) => {
-          console.log(err.error.message);
-
           this.dialog.open(Dialog3Component, {
             data: {
               message: err.error.message
