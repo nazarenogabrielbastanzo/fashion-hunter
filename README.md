@@ -4,7 +4,7 @@ Este es el repositorio frontend del grupo c4-05-m del programa [NoCountry](https
 
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
-## Screenshot
+## Screenshot:
 ![Fashion Hunter - Home](./images/Fashion-Hunter.png "Fashion Hunter - Home")
 
 ## Demo:
