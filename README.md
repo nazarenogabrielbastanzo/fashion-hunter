@@ -1,26 +1,21 @@
 # Fashion Hunter - Frontend
 
-Este es el repositorio frontend del grupo c4-05-m del programa NoCountry.
+Este es el repositorio frontend del grupo c4-05-m del programa [NoCountry](https://www.nocountry.tech/).
 
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
 ## Demo:
-
-https://fashion-hunter-27637.web.app/
+[Ver en YouTube](https://youtu.be/uJ6rDGtIRSQ?si=CR15WZmqzHnNQOk4)
 
 ## Uso:
 
 1. Clonar el repositorio:
     ```sh
-    git clone https://github.com/No-Country/c4-05-m.git
+    git clone https://github.com/nazarenogabrielbastanzo/fashion-hunter.git
     ```
-2. Sincronizar una rama nueva en local `frontend-prod` con la rama remota `origin/frontend-prod`:
+2. Moverse a la carpeta del proyecto:
     ```sh
-    git checkout -b frontend-prod origin/frontend-prod
-    ```
-3. Moverse a la carpeta del proyecto y luego al folder /Frontend:
-    ```sh
-    cd c4-05-m/Frontend
+    cd fashion-hunter
     ```
 4. Instalar los paquetes necesarios:
     ```sh
@@ -36,18 +31,3 @@ https://fashion-hunter-27637.web.app/
     ```sh
     http://localhost:4200/
     ```
-## Deploy
-
-1. ```sh
-    npm run build
-    ```
-2. ```sh
-    git add .
-    ```
-3. ```sh
-    git commit -m "My feature"
-    ```
-4. ```sh
-    git push
-    ```
-5. Esperar unos minutos, e ingresar a https://fashion-hunter-27637.web.app/ 
