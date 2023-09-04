@@ -53,8 +53,6 @@ export class PostComponent implements OnInit {
       ).subscribe();
 
     this.likes.next(this.post.numLikes);
-
-    console.log(this.post);
   }
 
   like(postId: string, likes: number) {
