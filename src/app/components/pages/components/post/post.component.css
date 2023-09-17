@@ -50,6 +50,7 @@
 }
 .elapsed p {
   margin-top: 0px;
+  text-transform: capitalize;
 }
 .post-image {
   display: block;
